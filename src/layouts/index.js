@@ -1,12 +1,20 @@
-import styles from './index.css';
 
 function BasicLayout(props) {
   return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to umi!</h1>
-      {props.children}
+    <div>
+      <h1>zhuye</h1>
     </div>
   );
 }
 
-export default BasicLayout;
+function SimpleLayout(props) {
+  return <div>{props.children}</div>;
+}
+
+export default props => {
+  if (props.location.pathname === '/admin') {
+    return <SimpleLayout {...props} />;
+  }
+  return <BasicLayout {...props} />;
+};
+
