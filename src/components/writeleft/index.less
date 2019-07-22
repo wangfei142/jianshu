@@ -5,7 +5,8 @@
   background-color: #404040;
   color: #f2f2f2;
   position: relative;
-  font-size: 12px;
+  font-size: 14px;
+  overflow: hidden;
 }
 .writeGoHome{
   padding: 30px 18px 5px;
@@ -55,3 +56,71 @@
   background: #404040;
   border:none
 }
+.writeCollectedList{
+  li{
+    padding: 0 15px;
+    line-height: 40px;
+    display: flex
+  }
+}
+
+.writeTitle{
+  flex: 1
+}
+.writeSet{
+  width: 40px;
+  text-align: center
+}
+.writeActive{  // 选中样式
+  border-left: 3px solid #ec7259;
+}
+.popoverItem{
+  padding: 10px;
+  border-bottom: 1px solid #d9d9d9;
+
+  span{
+    margin-left: 10px;
+  }
+}
+.popoverItem:last-child{
+  border: none;
+}
+.popoverItem:hover{
+  background-color: #666;
+  color: #fff;
+}
+.popoverItem:last-child:hover{
+  border-radius:0 0 4px 4px;
+}
+.popoverItem:first-child:hover{
+  border-radius: 4px 4px 0 0;
+  }
+:global(.ant-popover-inner-content){
+  padding: 0;
+}
+
+
+.writeLeftFoot{
+  display: flex;
+  padding: 15px;
+  position: absolute;
+  bottom:0 ;
+  font-size: 14px;
+  height: 50px;
+  width: 100%;
+
+
+}
+ .writeLeftFootSet{
+    float: left;
+    span{
+      margin-left: 5px;
+    }
+  }
+  .writeLeftFootTo{
+    flex: 1;
+    text-align: right;
+    span{
+      margin-right:5px;
+    }
+  }
