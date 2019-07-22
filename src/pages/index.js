@@ -1,5 +1,6 @@
 import SubjectList from '../components/datalist/index';
 import Rightlits from '../components/rightlist/index';
+import Footerhome from '../components/footer/index';
 import styles from './index.css';
 import React, { Component } from 'react';
 
@@ -10,15 +11,19 @@ class Home extends Component {
   }
   render() {
     return (
-      <div className={styles.container}>
-        <div className={styles.headercont}>
-          <SubjectList />
+      <div>
+        <div className={styles.container}>
+          <div className={styles.headercont}>
+            <SubjectList />
+          </div>
+          <div className={styles.rightlits}>
+            <Rightlits />
+          </div>
         </div>
-        <div className={styles.rightlits}>
-          <Rightlits />
+        <div className={styles.container}>
+          <Footerhome />
         </div>
       </div>
-
     );
   }
 }
