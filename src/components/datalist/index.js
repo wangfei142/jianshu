@@ -1,9 +1,10 @@
 // 左侧菜单组件
 import React, { Component } from 'react';
-import { connect } from 'dva';
 import styles from './index.less';
-import { Input, Icon, Menu, Dropdown } from 'antd';
+import { Icon } from 'antd';
+// import { Link } from 'react-router-dom';
 import imgtushu from '../../assets/wzhangru.jpg';
+// import Cketch from '../../pages/cketch/index';
 
 const listdata = [
   {
@@ -77,10 +78,16 @@ const listdata = [
     like: '2231',
   },
 ];
+
 class SubjectList extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  //失败路由无法跳转
+  header_title(data) {
+    console.log(data);
   }
 
   render() {
@@ -91,7 +98,13 @@ class SubjectList extends Component {
             return (
               <li key={item.id}>
                 <div>
-                  <a>{item.title}</a>
+                  <a
+                    onClick={() => {
+                      this.header_title(item.id);
+                    }}
+                  >
+                    {item.title}
+                  </a>
                   <p>{item.data}</p>
                   <div>
                     <span>
@@ -120,6 +133,7 @@ class SubjectList extends Component {
             );
           })}
         </ul>
+        <button className={styles._rigntlist_button}>阅读更多</button>
       </div>
     );
   }
