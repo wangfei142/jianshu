@@ -1,3 +1,12 @@
-export default function () {
-  return <div>首页</div>;
+
+function BasicLayout(props) {
+  return (
+    <div>
+      首页
+    </div>
+  );
 }
+
+export default props => {
+  return <BasicLayout {...props} />;
+};
