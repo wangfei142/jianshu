@@ -3,65 +3,120 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './index.less';
 import { Input, Icon, Menu, Dropdown, message } from 'antd';
+import touxiang from '../../assets/tuoxian.jpg';
+import Navlink from 'umi/navlink';
 
 //消息部分的下拉菜单
 const menu = (
-  <Menu >
-    <Menu.Item  >
-      <a target="_blank" href="#" ><span><Icon type="message" /></span>评论</a>
+  <Menu>
+    <Menu.Item>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="message" />
+        </span>
+        评论
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="upload" /></span>投稿请求</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="upload" />
+        </span>
+        投稿请求
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="mail" /></span>简信</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="mail" />
+        </span>
+        简信
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="heart" /></span>喜欢点赞</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="heart" />
+        </span>
+        喜欢点赞
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="ellipsis" /></span>其它提醒</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="ellipsis" />
+        </span>
+        其它提醒
+      </a>
     </Menu.Item>
   </Menu>
-
 );
 
 //头像部分的下拉菜单
 const portrait = (
-  <Menu >
-    <Menu.Item  >
-      <a target="_blank" href="#" ><span><Icon type="user" /></span>我的主页</a>
+  <Menu>
+    <Menu.Item>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="user" />
+        </span>
+        我的主页
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="book" /></span>收藏的文章</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="book" />
+        </span>
+        收藏的文章
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="heart" /></span>喜欢的文章</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="heart" />
+        </span>
+        喜欢的文章
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="circle" /></span>已购内容</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="circle" />
+        </span>
+        已购内容
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="wallet" /></span>我的钱包</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="wallet" />
+        </span>
+        我的钱包
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="setting" /></span>设置</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="setting" />
+        </span>
+        设置
+      </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#"><span><Icon type="logout" /></span>退出</a>
+      <a target="_blank" href="#">
+        <span>
+          <Icon type="logout" />
+        </span>
+        退出
+      </a>
     </Menu.Item>
   </Menu>
-
 );
 
-
-
 class Header extends React.Component {
-  state = {
-
-  };
+  state = {};
   render() {
-
     const { Search } = Input;
     return (
       <div className={styles._header_top}>
@@ -73,34 +128,47 @@ class Header extends React.Component {
                 <h2>简书</h2>
               </li>
               <li className={styles._header_licont}>
-                <ul className={styles._h_licont_ul} >
-                  <li><Icon type="compass" />&nbsp;发现</li>
-                  <li><Icon type="read" />&nbsp;关注</li>
+                <ul className={styles._h_licont_ul}>
+                  <li>
+                    <Icon type="compass" />
+                    &nbsp;发现
+                  </li>
+                  <li>
+                    <Icon type="read" />
+                    &nbsp;关注
+                  </li>
                   <Dropdown overlay={menu}>
-                    <li className={styles.lig}><Icon type="sound" />&nbsp;消息</li>
+                    <li className={styles.lig}>
+                      <Icon type="sound" />
+                      &nbsp;消息
+                    </li>
                   </Dropdown>
-                  <li className={styles._header_input}><Search
-                    placeholder="搜索"
-                    onSearch={value => console.log(value)}
-                  />
+                  <li className={styles._header_input}>
+                    <Search placeholder="搜索" onSearch={value => console.log(value)} />
                   </li>
                 </ul>
               </li>
               <li className={styles._header_liright}>
-                <ul className={styles._h_liright_ul} >
-
+                <ul className={styles._h_liright_ul}>
                   <li className={styles._h_liright_ul_lia}>Aa</li>
 
-                  <li className={styles._h_liright_ul_lia}><Icon type="sketch" /></li>
+                  <li className={styles._h_liright_ul_lia}>
+                    <Icon type="sketch" />
+                  </li>
 
                   <Dropdown overlay={portrait}>
-                    <li className={[styles.lig, styles._h_tignt_ta]}><span>
-                      <img src="" alt="没" className={styles._h_tignt_tb} />
-                      <Icon type="caret-down" />
-                    </span></li>
+                    <li className={[styles.lig, styles._h_tignt_ta]}>
+                      <span>
+                        <img src={touxiang} alt="没" className={styles._h_tignt_tb} />
+                      </span>
+                      <Icon className={styles._touxiang_icon} type="caret-down" />
+                    </li>
                   </Dropdown>
 
-                  <li className={styles._h_right_li}><Icon type="edit" />&nbsp;写文章</li>
+                  <Navlink to="/write" className={styles._h_right_li}>
+                    <Icon type="edit" />
+                    &nbsp;写文章
+                  </Navlink>
                 </ul>
               </li>
             </ul>
@@ -113,11 +181,7 @@ class Header extends React.Component {
 
 export default connect(
   state => {
-    return {
-
-    };
+    return {};
   },
-  () => {
-
-  }
+  () => {},
 )(Header);
