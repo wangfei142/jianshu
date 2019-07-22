@@ -28,7 +28,7 @@ class FoldWrite extends React.Component {
   }
   animate = () => {
     console.log(1)
-    this.setState((state) => ({ height: state.height === 0 ? 70 : 0 }))
+    this.setState((state) => ({ height: state.height === 0 ? 72 : 0 }))
   }
   render() {
     return (
