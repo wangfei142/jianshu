@@ -1,0 +1,38 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  line-height: 100%;
+  padding: 0 20px;
+}
+
+.left {
+  font-size: 30px;
+  color: #fff;
+}
+
+.right {
+  display: flex;
+  flex-flow: row-reverse;
+  color: #fff;
+
+  div {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-left: 1px solid #3f3f3f;
+    cursor: pointer;
+
+    &:hover {
+      background: #464646;
+    }
+  }
+
+  .userInfo {
+    width: auto;
+    padding: 0 10px;
+    border-left: none;
+  }
+}

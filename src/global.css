@@ -124,11 +124,18 @@ table {
   border-spacing: 0;
 }
 
+<<<<<<< HEAD
 /* // ============ 万能的分割线 ============= */
 html,
 body {
   height: 100%;
   /* overflow: hidden; */
+=======
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+>>>>>>> wf
 }
 #root {
   height: 100%;
