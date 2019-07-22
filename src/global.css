@@ -128,7 +128,7 @@ table {
 html,
 body {
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 #root {
   height: 100%;
