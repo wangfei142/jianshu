@@ -1,16 +1,17 @@
 import styles from './index.less';
+import NavLink from 'umi/navlink'
 
 function BasicLayout(props) {
   return (
-    <div>
-
+    <div className={styles.container}>
+      <NavLink to='/write'>写文章</NavLink>
     </div>
   );
 }
-function articleFrom(props) {
+function ArticleFrom(props) {
   return (
-    <div>
-      1111
+    <div className={styles.container}>
+      {props.children}
     </div>
   )
 
@@ -18,8 +19,8 @@ function articleFrom(props) {
 
 
 export default props => {
-  if (props.localtion.pathname === '/write') {
-    return articleFrom
+  if (props.location.pathname === '/write') {
+    return <ArticleFrom {...props} />
   }
-  return BasicLayout
+  return <BasicLayout {...props} />
 };
