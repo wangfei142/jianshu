@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './index.less';
-import { Input, Icon, Menu, Dropdown, message } from 'antd';
+import { Input, Icon, Menu, Dropdown } from 'antd';
 import touxiang from '../../assets/tuoxian.jpg';
 import Navlink from 'umi/navlink';
 
@@ -180,8 +180,8 @@ class Header extends React.Component {
 }
 
 export default connect(
-  state => {
-    return {};
-  },
-  () => {},
+  // state => {
+  //   return {};
+  // },
+  // () => {},
 )(Header);
