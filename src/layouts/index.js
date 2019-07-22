@@ -1,12 +1,25 @@
-import styles from './index.css';
+import styles from './index.less';
 
 function BasicLayout(props) {
   return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to umi!</h1>
-      {props.children}
+    <div>
+
     </div>
   );
 }
+function articleFrom(props) {
+  return (
+    <div>
+      1111
+    </div>
+  )
 
-export default BasicLayout;
+}
+
+
+export default props => {
+  if (props.localtion.pathname === '/write') {
+    return articleFrom
+  }
+  return BasicLayout
+};
