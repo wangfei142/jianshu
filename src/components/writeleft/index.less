@@ -1,0 +1,126 @@
+
+.gutterRow{
+  height: 100%;
+  overflow-y: auto;
+  background-color: #404040;
+  color: #f2f2f2;
+  position: relative;
+  font-size: 14px;
+  overflow: hidden;
+}
+.writeGoHome{
+  padding: 30px 18px 5px;
+  text-align: center;
+  a{
+    display: block;
+    font-size: 15px;
+    padding: 9px 0;
+    color: #ec7259;
+    border: 1px solid rgba(236,114,89,.8);
+    border-radius: 20px;
+  }
+}
+
+.writeAddCollected{
+  padding: 0 15px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.foldtitle{
+  font-weight: 800;
+}
+.foldInput{
+  width: 100%;
+  color: #ccc;
+  background-color: #595959;
+  height: 25px;
+  border: none;
+  margin-top: 10px;
+  text-indent: 1em;
+}
+.foldBotton{
+  margin-top: 10px;
+  button{
+    margin-left: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+}
+.foldSubim{
+  color: #42c02e;
+  background: #404040;
+  border: 1px solid #42c02e;
+  border-radius: 20px;
+}
+.foldCancel{
+  background: #404040;
+  border:none
+}
+.writeCollectedList{
+  li{
+    padding: 0 15px;
+    line-height: 40px;
+    display: flex
+  }
+}
+
+.writeTitle{
+  flex: 1
+}
+.writeSet{
+  width: 40px;
+  text-align: center
+}
+.writeActive{  // 选中样式
+  border-left: 3px solid #ec7259;
+}
+.popoverItem{
+  padding: 10px;
+  border-bottom: 1px solid #d9d9d9;
+
+  span{
+    margin-left: 10px;
+  }
+}
+.popoverItem:last-child{
+  border: none;
+}
+.popoverItem:hover{
+  background-color: #666;
+  color: #fff;
+}
+.popoverItem:last-child:hover{
+  border-radius:0 0 4px 4px;
+}
+.popoverItem:first-child:hover{
+  border-radius: 4px 4px 0 0;
+  }
+:global(.ant-popover-inner-content){
+  padding: 0;
+}
+
+
+.writeLeftFoot{
+  display: flex;
+  padding: 15px;
+  position: absolute;
+  bottom:0 ;
+  font-size: 14px;
+  height: 50px;
+  width: 100%;
+
+
+}
+ .writeLeftFootSet{
+    float: left;
+    span{
+      margin-left: 5px;
+    }
+  }
+  .writeLeftFootTo{
+    flex: 1;
+    text-align: right;
+    span{
+      margin-right:5px;
+    }
+  }
