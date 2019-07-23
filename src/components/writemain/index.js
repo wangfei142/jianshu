@@ -14,18 +14,6 @@ class WriteMain extends React.Component {
             <Icon className={styles.titleListIcon} type="file-text" theme="filled" />
             <span>无标题文章</span>
           </li>
-          <li className={styles.titleItem} >
-            <Icon className={styles.titleListIcon} type="file-text" theme="filled" />
-            <span>无标题文章</span>
-          </li>
-          <li className={styles.titleItem} >
-            <Icon className={styles.titleListIcon} type="file-text" theme="filled" />
-            <span>无标题文章</span>
-          </li>
-          <li className={styles.titleItem} >
-            <Icon className={styles.titleListIcon} type="file-text" theme="filled" />
-            <span>无标题文章</span>
-          </li>
         </ul>
         <div className={styles.bottomAddTitle}>
           <Icon type="plus-circle" theme="filled" />
