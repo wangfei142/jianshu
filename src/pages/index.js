@@ -1,33 +1,24 @@
-
-import SubjectList from '../components/datalist/index';
-import Rightlits from '../components/rightlist/index';
-import Footerhome from '../components/footer/index';
-import styles from './index.css';
+import Homea from './home/index';
+import styles from './index.less';
 import React, { Component } from 'react';
+import Header from '../components/header/index';
+import Logout from '../components/header/logout ';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   render() {
+    let list = window.localStorage.getItem('loginMethod');
     return (
-      <div>
-        <div className={styles.container}>
-          <div className={styles.headercont}>
-            <SubjectList />
-          </div>
-          <div className={styles.rightlits}>
-            <Rightlits />
-          </div>
-        </div>
-        <div className={styles.container}>
-          <Footerhome />
-        </div>
+      <div className={styles._home_body}>
+        {list ? <Header /> : <Logout />}
+
+        <Homea />
       </div>
     );
   }
-
 }
 
 export default Home;
