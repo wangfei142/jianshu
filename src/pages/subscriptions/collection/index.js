@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import styles from '../index.less';
 import styless from './index.less';
-import Timeline from '../timeline/index.js'
+// import Timeline from '../timeline/index.js'
 
 
 
@@ -33,7 +33,7 @@ export default class Collection extends React.Component{
             </ul>
           </div>
           <div>
-          <Timeline></Timeline> 
+          {/* <Timeline></Timeline>  */}
           </div>
       </div>
     )
