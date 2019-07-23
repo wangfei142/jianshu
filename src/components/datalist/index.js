@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import styles from './index.less';
 import { Icon } from 'antd';
-// import { Link } from 'react-router-dom';
+import { connect } from 'dva';
+import Banner from './banner'
 import imgtushu from '../../assets/wzhangru.jpg';
-// import Cketch from '../../pages/cketch/index';
+import Navlink from 'umi/navlink';
 
 const listdata = [
   {
@@ -86,25 +87,27 @@ class SubjectList extends Component {
   }
 
   //失败路由无法跳转
-  header_title(data) {
-    console.log(data);
-  }
+  // header_title(data) {
+  //   console.log(data);
+  // }
 
   render() {
     return (
       <div>
-        <ul className={styles._header_list}>
+        <ul className={styles._header_list}>     
+        <Banner />    
           {listdata.map(item => {
             return (
               <li key={item.id}>
                 <div>
-                  <a
+                  <Navlink
+                    to="cketch"
                     onClick={() => {
-                      this.header_title(item.id);
+                      this.props.header_title(item.id);
                     }}
                   >
                     {item.title}
-                  </a>
+                  </Navlink>
                   <p>{item.data}</p>
                   <div>
                     <span>
@@ -139,4 +142,11 @@ class SubjectList extends Component {
   }
 }
 
-export default SubjectList;
+export default connect(
+  null,
+  //向仓库传方法
+  {
+    header_title: tableDataId => ({ type: 'article/tableDataOperation', tableDataId }),
+  },
+
+)(SubjectList);
