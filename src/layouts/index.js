@@ -3,10 +3,10 @@ import Header from '../components/header/index';
 import styles from "./index.css"
 function BasicLayout(props) {
   return (
-    <div>
+    <>
       <Header />
       {props.children}
-    </div>
+    </>
   );
 }
 function ArticleFrom(props) {
