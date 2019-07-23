@@ -2,9 +2,9 @@
 import styles from "./index.less"
 function BasicLayout(props) {
   return (
-    <div>   
+    <>
       {props.children}
-    </div>
+    </>
   );
 }
 function ArticleFrom(props) {
