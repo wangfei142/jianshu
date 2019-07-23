@@ -1,3 +1,4 @@
+
 import SubjectList from '../components/datalist/index';
 import Rightlits from '../components/rightlist/index';
 import Footerhome from '../components/footer/index';
@@ -26,6 +27,7 @@ class Home extends Component {
       </div>
     );
   }
+
 }
 
 export default Home;

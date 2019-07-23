@@ -1,3 +1,4 @@
+
 import Header from '../components/header/index';
 import styles from "./index.css"
 function BasicLayout(props) {
@@ -21,7 +22,6 @@ export default props => {
   }
   return <BasicLayout {...props} />;
 };
-
 
 
 
