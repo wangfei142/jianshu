@@ -1,7 +1,8 @@
 import Homea from './home/index';
-// import styles from './index.css';
+import styles from './index.less';
 import React, { Component } from 'react';
 import Header from '../components/header/index';
+import Logout from '../components/header/logout ';
 
 class Home extends Component {
   constructor(props) {
@@ -9,9 +10,11 @@ class Home extends Component {
     this.state = {};
   }
   render() {
+    let list = window.localStorage.getItem('loginMethod');
     return (
-      <div>
-        <Header />
+
+      <div className={styles._home_body}>
+        {list ? <Header /> : <Logout />}
 
         <Homea />
       </div>

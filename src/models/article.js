@@ -4,7 +4,8 @@ export default {
   namespace: 'article',
 
   state: {
-    data: []
+    tableDataId: '',
+    activeList: []
   },
 
 
@@ -12,7 +13,7 @@ export default {
     *getArticle(action, { put }) {
       let response = yield axios.get('http://10.36.140.11:8080/api/article');
       let res = yield response.data;
-      yield put({ type: 'setArticle', data: res.data.list });
+      yield put({ type: 'setArticle', activeList: res.data.list });
     },
     *delArticle(action, { put }) {
       let response = yield axios.delete(`http://10.36.140.11:8080/api/article/${action.id}`);
@@ -26,12 +27,21 @@ export default {
       return {
         ...state,
         ...{
-          data: action.data,
+          activeList: action.activeList,
+        },
+      };
+      
+    },
+tableDataOperation(state, action) {
+      console.log(action.tableDataId);
+      return {
+        ...state,
+        ...{
+          tableDataId: action.tableDataId
         },
       };
     },
-    // setUserName(state, action) {
-    //   return { ...state, ...{ userName: action.name } };
-    // },
-  },
 }
+
+
+

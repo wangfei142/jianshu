@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
 import styles from './index.less';
-
+// import { Router, Route, Link } from 'react-router';
 import { connect } from 'dva';
 
-import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -20,27 +19,42 @@ class Login extends Component {
       <div className={styles._login_body}>
         <div className={styles._login_main}>
           <div className={styles._login_cut}>
-            <a href="/login" className={styles._login_style}>
-              登录
-            </a>
+            <a href="/login">登录</a>
             <i>·</i>
-            <a href="/sign">注册</a>
+            <a href="/sign" className={styles._login_style}>
+              注册
+            </a>
           </div>
-
           <Form onSubmit={this.handleSubmit} className={styles.login_form}>
+            {/* 昵称 */}
             <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+              {getFieldDecorator('author', {
+                rules: [
+                  { required: true, message: '请输入昵称!' },
+                  // { pattern: [\u4e00-\u9fa5], message: '请输入昵称!' }
+                ],
               })(
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="账户"
+                  placeholder="昵称"
                 />,
               )}
             </Form.Item>
+            {/* 手机号 */}
+            <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+              {getFieldDecorator('phone', {
+                rules: [{ required: true, message: '请输入手机号!' }],
+              })(
+                <Input
+                  prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="手机号"
+                />,
+              )}
+            </Form.Item>
+            {/* 密码 */}
             <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+                rules: [{ required: true, message: '请输入密码!' }],
               })(
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -49,18 +63,16 @@ class Login extends Component {
                 />,
               )}
             </Form.Item>
+
             <Form.Item>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: false,
-              })(
-                <div className={styles._login_Checkbox}>
-                  <Checkbox>记住密码</Checkbox>
-                </div>,
-              )}
-              <a className={styles._login_form_forgot} href="">
-                登录遇到问题？
-              </a>
+              {/* //安全协议 */}
+              <span className={styles._login_form_forgot}>
+                <span>
+                  点击 “注册” 即表示您同意并愿意遵守简书 <br /> <a href="#">用户协议</a> 和
+                  <a href="#">隐私政策</a> 。
+                </span>
+              </span>
+              {/* 提交按钮 */}
               <Button
                 type="primary"
                 htmlType="submit"
@@ -69,12 +81,10 @@ class Login extends Component {
               >
                 登录
               </Button>
-              <div className={styles._login_bottom}>—————— 社交帐号登录 ——————</div>
+              {/* 社交账号注册 */}
+              <div className={styles._login_bottom}>———— 社交帐号直接注册 ————</div>
               <ul>
                 <li className={styles._logig_icon}>
-                  <span className={styles._login_weibo}>
-                    <Icon type="weibo-circle" />
-                  </span>
                   <span className={styles._login_wechat}>
                     <Icon type="wechat" />
                   </span>
@@ -91,7 +101,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // To disabled submit button at the beginning.
+    // 在开始时禁用提交按钮.
     this.props.form.validateFields();
   }
 
@@ -106,36 +116,30 @@ class Login extends Component {
         let _this = this;
 
         setTimeout(() => {
-          console.log(_this.props.listdata.code,"登录失败没数据网络连接失败");
-          if (_this.props.listdata.code === 0) {
-            message.success('登录成功');
-            _this.props.history.push('/');
+          console.log(_this.props.listdata);
+          if (_this.props.listdata === 0) {
+            message.success('成功注册');
+            _this.props.history.push('/login');
           } else {
-            message.error('账号或密码错误');
+            message.error('手机号重复');
           }
         }, 1000);
       }
     });
   };
 }
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login);
-
-
 
 const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(Login);
 
 export default connect(
-  // null,
-  // //向仓库拿数据
-  (state, action) => {
+  state => {
     return {
       //从仓库中取出axios 返回的数据
-      listdata: state.user.loginMethod,
+      listdata: state.user.registration,
     };
   },
   //向仓库传方法
   {
-    header_title: name => ({ type: 'user/loginOperation', name }),
+    header_title: values => ({ type: 'user/RegisterOperation', values }),
   },
 )(WrappedHorizontalLoginForm);
-
