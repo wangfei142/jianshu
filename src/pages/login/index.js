@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import styles from './index.less';
 
 import { connect } from 'dva';
@@ -117,6 +118,9 @@ class Login extends Component {
     });
   };
 }
+const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login);
+
+
 
 const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(Login);
 
@@ -134,3 +138,4 @@ export default connect(
     header_title: name => ({ type: 'user/loginOperation', name }),
   },
 )(WrappedHorizontalLoginForm);
+

@@ -12,6 +12,7 @@ class Home extends Component {
   render() {
     let list = window.localStorage.getItem('loginMethod');
     return (
+
       <div className={styles._home_body}>
         {list ? <Header /> : <Logout />}
 

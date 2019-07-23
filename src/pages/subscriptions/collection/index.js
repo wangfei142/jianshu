@@ -3,7 +3,9 @@ import { Menu, Dropdown, Icon } from 'antd';
 import styles from '../index.less';
 import styless from './index.less';
 // import Timeline from '../timeline/index.js'
+
 import { Modal, Input } from 'antd';
+
 
 class App extends React.Component {
   state = { visible: false };
@@ -63,6 +65,8 @@ export default class Collection extends React.Component {
             <p>@IT.互联网</p>
             <p><span><a href="">简书</a></span><span> 编 · 收录了54355篇文章 · 2027595人关注</span></p>
           </div>
+
+          <div>
           <div className={styless.authorOne}>
             <App />
             <span><a href=""> 专题主页<i className={styless.ico}>></i></a></span>
