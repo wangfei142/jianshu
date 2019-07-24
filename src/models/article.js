@@ -17,6 +17,7 @@ export default {
       let response = yield axios.get('http://10.36.140.11:8080/api/comment');
       let res = yield response.data;
       yield put({ type: 'setComment', commentList: res.data.list });
+      yield put({ type: 'setCompilationsList', commentList: res.data.list })
     },
     //删除评论
     *delComment(action, { put }) {
@@ -62,13 +63,31 @@ export default {
     },
     // 设置评论列表
     setCompilationsList(state, action) {
-      let sArr = new Set();
+      let commentList = [...state.commentList];
+      let activeList = [...state.activeList];
+      let newList = [];
+      commentList.forEach(c => {
+        console.log(c);
+        let title = c.title;
+        let index = newList.findIndex(item => item.title === title);
+        if (index > -1) {
+          newList[index].comment.push(c);
+        } else {
+          let obj = {
+            title,
+            comment: [c]
+          };
+          newList.push(obj);
+        }
+      });
+      console.log(newList);
+
 
 
       return {
         ...state,
         ...{
-          commentList: action.commentList,
+          compilationsList: newList,
         },
       };
     },
