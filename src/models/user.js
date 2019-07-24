@@ -11,17 +11,28 @@ export default {
   },
   // 异步
   effects: {
+    // 获取用户
     *getUser(action, { put }) {
-      let response = yield axios.post('http://localhost:8080/api/user/getuser');
+      let response = yield axios.post('http://10.36.140.11:8080/api/user/getuser');
       let res = yield response.data;
       yield put({ type: 'setUser', data: res.data.list });
     },
+    //删除用户
     *delUser(action, { put }) {
       let response = yield axios.delete(`http://10.36.140.11:8080/api/user/del/${action.id}`);
       let res = yield response.data;
       yield put({ type: 'getUser' });
     },
-       *RegisterOperation(action, { put }) {
+    // 修改用户信息
+    *updateUser(action, { put }) {
+      console.log(action.data);
+      let response = yield axios.post(`http://10.36.140.11:8080/api/user/amend`, action.data);
+      let res = yield response.data;
+      console.log(res);
+      yield put({ type: 'getUser' });
+    },
+
+    *RegisterOperation(action, { put }) {
       // 为给定 ID 的 user 创建请求
       console.log(1);
       let data = {
@@ -36,7 +47,6 @@ export default {
 
       console.log(res);
       yield put({ type: 'RegisterOperationlist', data: res.code });
-
     },
     //登录函数
     *loginOperation(action, { put }) {

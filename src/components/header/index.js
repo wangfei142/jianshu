@@ -11,7 +11,7 @@ import Navlink from 'umi/navlink';
 const menu = (
   <Menu>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="message" />
         </span>
@@ -19,7 +19,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="upload" />
         </span>
@@ -27,7 +27,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="mail" />
         </span>
@@ -35,7 +35,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="heart" />
         </span>
@@ -43,7 +43,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="ellipsis" />
         </span>
@@ -56,7 +56,7 @@ const menu = (
 const listdetele = ({ key }) => {
   //key是点击获取当前的item_'' 下标，
   //退出登录删除本地的内容
-  if (key == 'item_6') {
+  if (key === 'item_6') {
     localStorage.clear();
   }
 };
@@ -64,7 +64,7 @@ const listdetele = ({ key }) => {
 const portrait = (
   <Menu onClick={listdetele}>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="user" />
         </span>
@@ -72,7 +72,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="book" />
         </span>
@@ -80,7 +80,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="heart" />
         </span>
@@ -88,7 +88,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="heart" />
         </span>
@@ -96,7 +96,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="wallet" />
         </span>
@@ -104,7 +104,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="setting" />
         </span>
@@ -112,7 +112,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="/">
+      <a href="/">
         <span>
           <Icon type="logout" />
         </span>
@@ -122,8 +122,13 @@ const portrait = (
   </Menu>
 );
 class Header extends React.Component {
-  state = {};
+  state = {
+    headerImg: window.localStorage.getItem("loginMethod") ? JSON.parse(window.localStorage.getItem("loginMethod")) : []
+  };
+
   render() {
+    console.log(this.state.headerImg);
+
     const { Search } = Input;
     return (
       <div className={styles._header_top}>
@@ -163,7 +168,6 @@ class Header extends React.Component {
               <li className={styles._header_liright}>
                 <ul className={styles._h_liright_ul}>
                   <li className={styles._h_liright_ul_lia}>Aa</li>
-
                   <li className={styles._h_liright_ul_lia}>
                     <Icon type="sketch" />
                   </li>
@@ -171,7 +175,7 @@ class Header extends React.Component {
                   <Dropdown overlay={portrait} overlayClassName="rightimgtu">
                     <li className={[styles.lig, styles._h_tignt_ta]}>
                       <span>
-                        <img src={this.props.headerImg.avatar} alt=" " className={styles._h_tignt_tb} />
+                        <img src={this.state.headerImg.avatar} alt=" " className={styles._h_tignt_tb} />
                       </span>
                       <Icon className={styles._touxiang_icon} type="caret-down" />
                     </li>
