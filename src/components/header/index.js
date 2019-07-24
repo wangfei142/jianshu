@@ -104,7 +104,8 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <a href="/settings/basic">
+
         <span>
           <Icon type="setting" />
         </span>
