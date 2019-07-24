@@ -35,6 +35,7 @@ class Rightlits extends Component {
 
   render() {
     return (
+      //四张大图
       <div className={styles.rightlits}>
         <div>
           <ul className={styles._rightimg}>

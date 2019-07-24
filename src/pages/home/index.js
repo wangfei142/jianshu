@@ -12,8 +12,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <div>
-     
+      <div>     
         <div className={styles.container}>
           <div className={styles.headercont}>
             <SubjectList />
