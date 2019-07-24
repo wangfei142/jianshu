@@ -5,6 +5,7 @@ import { connect } from 'dva'
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import axios from 'axios'
+import router from 'umi/router'
 
 class WriteRight extends React.Component {
   constructor(props) {
@@ -75,6 +76,7 @@ class WriteRight extends React.Component {
         this.setState({ loading: !this.state.loading })
         message.success('发布成功');
         this.props.getActiveList()   //重新get 仓库列表
+        router.push('/')
       }).catch(error => {
         this.setState({ loading: !this.state.loading })
         message.error('网络连接错误');
