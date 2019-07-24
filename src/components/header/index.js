@@ -3,8 +3,9 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './index.less';
 import { Input, Icon, Menu, Dropdown } from 'antd';
-import touxiang from '../../assets/tuoxian.jpg';
+// import touxiang from '../../assets/tuoxian.jpg';
 import Navlink from 'umi/navlink';
+// import { tupleNum } from 'antd/lib/_util/type';
 
 //消息部分的下拉菜单
 const menu = (
@@ -51,17 +52,17 @@ const menu = (
     </Menu.Item>
   </Menu>
 );
-
-//头像部分的下拉菜单
-
-const listdetele = () => {
-  console.log(1);
-  localStorage.clear();
-  // message.info(`Click on item ${key}`);
+//退出登录删除本地的内容
+const listdetele = ({ key }) => {
+  //key是点击获取当前的item_'' 下标，
+  //退出登录删除本地的内容
+  if (key == 'item_6') {
+    localStorage.clear();
+  }
 };
-
+//头像部分的下拉菜单
 const portrait = (
-  <Menu  onClick={listdetele}>
+  <Menu onClick={listdetele}>
     <Menu.Item>
       <a target="_blank" href="/">
         <span>
@@ -110,10 +111,9 @@ const portrait = (
         设置
       </a>
     </Menu.Item>
-    <Menu.Item   
-    >
-      <a target="_blank" href="/" >
-        <span >
+    <Menu.Item>
+      <a target="_blank" href="/">
+        <span>
           <Icon type="logout" />
         </span>
         退出
@@ -132,7 +132,9 @@ class Header extends React.Component {
             <ul className={styles._header_ul}>
               <li className={styles._header_lileft}>
                 {/* <img src="../../../assets/jshu.png" alt="Nav logo" /> */}
-                <h2>简书</h2>
+                <a href="/">
+                  简书
+                </a>
               </li>
               <li className={styles._header_licont}>
                 <ul className={styles._h_licont_ul}>
@@ -141,8 +143,10 @@ class Header extends React.Component {
                     &nbsp;发现
                   </li>
                   <li>
-                    <Icon type="read" />
-                    &nbsp;关注
+                    <a href="/subscriptions/timeline">
+                      <Icon type="read" />
+                      &nbsp;关注
+                    </a>
                   </li>
                   {/* // 消息下拉数据 */}
                   <Dropdown overlay={menu} overlayClassName="rightimgtu">
@@ -167,7 +171,7 @@ class Header extends React.Component {
                   <Dropdown overlay={portrait} overlayClassName="rightimgtu">
                     <li className={[styles.lig, styles._h_tignt_ta]}>
                       <span>
-                        <img src={touxiang} alt="没" className={styles._h_tignt_tb} />
+                        <img src={this.props.headerImg.avatar} alt=" " className={styles._h_tignt_tb} />
                       </span>
                       <Icon className={styles._touxiang_icon} type="caret-down" />
                     </li>
@@ -180,6 +184,7 @@ class Header extends React.Component {
                 </ul>
               </li>
             </ul>
+
           </div>
         </div>
       </div>
@@ -187,8 +192,12 @@ class Header extends React.Component {
   }
 }
 
-export default connect()(Header);
-// state => {
-//   return {};
-// },
-// () => {},
+export default connect(
+  state => {
+    return {
+      headerImg: state.user.loginMethod,
+
+    };
+  },
+  () => { },
+)(Header);
