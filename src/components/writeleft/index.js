@@ -82,9 +82,7 @@ class WriteLeft extends React.Component {
               <div className={styles.writeSet}><Icon type="small-dash" /></div>
             </Popover>
           </li>
-          <li>
-            <span>日记本</span>
-          </li>
+
         </ul>
         <div className={styles.writeLeftFoot}>
           <Popover placement="topLeft" content={contentSet} trigger="click">

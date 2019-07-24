@@ -1,4 +1,4 @@
-// // 评论管理
+// // 文章管理
 import React from "react";
 import styles from './index.less';
 import { connect } from "dva"
@@ -10,7 +10,6 @@ class NestedTable extends React.Component {
     visible: false,
     article: '',
     title: '',
-
   }
   handleOk = () => {
     this.setState({
@@ -27,14 +26,9 @@ class NestedTable extends React.Component {
     });
   };
   expandedRowRender = (row) => {
-    console.log(row);
 
     const columns = [
-      {
-        title: 'ID',
-        dataIndex: 'id',
-        render: text => <span>{text}</span>,
-      },
+
       {
         title: '评论人',
         dataIndex: 'username',
@@ -54,26 +48,31 @@ class NestedTable extends React.Component {
             <Popconfirm
               title="请确认要删除么"
               onCancel={() => {
-                console.log('你点击取消');
+                console.log(row._id);
               }}
-              onConfirm={() => {
+              onConfirm={(row) => {
+                console.log(row._id);
+
               }}
             >
               <Button type="danger" className={styles.bnt}>删除</Button>
             </Popconfirm>
-          </div>
+          </div >
         ),
       },
     ];
-    return <Table columns={columns} dataSource={row.comment} pagination={false} rowKey={"id"} />;
+    return <Table
+      columns={columns}
+      dataSource={row.comment}
+      pagination={false}
+      rowKey={"_id"}
+      pagination={{
+        defaultPageSize: 5, // 默认每页显示多少
+      }} />;
   };
 
   columns = [
-    {
-      title: '序号',
-      dataIndex: 'id',
-      render: text => <span>{text}</span>,
-    },
+
     {
       title: '作者',
       dataIndex: 'author',
@@ -104,7 +103,6 @@ class NestedTable extends React.Component {
         <div>
           <Button
             onClick={() => {
-              console.log(record);
 
               // 打开弹框
               this.setState({
@@ -122,6 +120,8 @@ class NestedTable extends React.Component {
               console.log('你点击取消');
             }}
             onConfirm={() => {
+              this.props.delArticle(record._id);
+
             }}
           >
             <Button type="danger" className={styles.bnt}>删除</Button>
@@ -130,7 +130,6 @@ class NestedTable extends React.Component {
       ),
     },
   ];
-
   render() {
     return (<>
       <Modal
@@ -146,7 +145,10 @@ class NestedTable extends React.Component {
         columns={this.columns}
         expandedRowRender={this.expandedRowRender}
         dataSource={this.props.data}
-        rowkey={"id"}
+        rowKey={"_id"}
+        pagination={{
+          defaultPageSize: 5, // 默认每页显示多少
+        }}
       /></>
     );
   }
@@ -154,17 +156,34 @@ class NestedTable extends React.Component {
 class Comments extends React.Component {
   render() {
     return (<>
-      <NestedTable data={this.props.data} />
+      <NestedTable data={this.props.data} {...this.props} />
     </>)
+  }
+  componentDidMount() {
+    this.props.getArticle()
   }
 }
 
 export default connect(
   (state) => {
     return {
-      data: state.article.data
+      data: state.article.activeList
     }
   },
-  null
+  (dispatch) => {
+    return {
+      getArticle: () => {
+        dispatch({
+          type: 'article/getArticle',
+        });
+      },
+      delArticle: (id) => {
+        dispatch({
+          type: 'article/delArticle',
+          id
+        });
+      },
+    }
+  }
 )(Comments)
 

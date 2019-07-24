@@ -10,7 +10,7 @@ import Navlink from 'umi/navlink';
 const menu = (
   <Menu>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="message" />
         </span>
@@ -18,7 +18,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="upload" />
         </span>
@@ -26,7 +26,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="mail" />
         </span>
@@ -34,7 +34,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="heart" />
         </span>
@@ -42,7 +42,7 @@ const menu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="ellipsis" />
         </span>
@@ -53,10 +53,17 @@ const menu = (
 );
 
 //头像部分的下拉菜单
+
+const listdetele = () => {
+  console.log(1);
+  localStorage.clear();
+  // message.info(`Click on item ${key}`);
+};
+
 const portrait = (
-  <Menu>
+  <Menu  onClick={listdetele}>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="user" />
         </span>
@@ -64,7 +71,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="book" />
         </span>
@@ -72,7 +79,7 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="heart" />
         </span>
@@ -80,15 +87,15 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
-          <Icon type="circle" />
+          <Icon type="heart" />
         </span>
         已购内容
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="wallet" />
         </span>
@@ -96,16 +103,17 @@ const portrait = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" href="#">
+      <a target="_blank" href="/">
         <span>
           <Icon type="setting" />
         </span>
         设置
       </a>
     </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" href="#">
-        <span>
+    <Menu.Item   
+    >
+      <a target="_blank" href="/" >
+        <span >
           <Icon type="logout" />
         </span>
         退出
@@ -113,7 +121,6 @@ const portrait = (
     </Menu.Item>
   </Menu>
 );
-
 class Header extends React.Component {
   state = {};
   render() {
@@ -137,7 +144,8 @@ class Header extends React.Component {
                     <Icon type="read" />
                     &nbsp;关注
                   </li>
-                  <Dropdown overlay={menu}>
+                  {/* // 消息下拉数据 */}
+                  <Dropdown overlay={menu} overlayClassName="rightimgtu">
                     <li className={styles.lig}>
                       <Icon type="sound" />
                       &nbsp;消息
@@ -155,8 +163,8 @@ class Header extends React.Component {
                   <li className={styles._h_liright_ul_lia}>
                     <Icon type="sketch" />
                   </li>
-
-                  <Dropdown overlay={portrait}>
+                  {/* //我的头像那边的下拉数据 */}
+                  <Dropdown overlay={portrait} overlayClassName="rightimgtu">
                     <li className={[styles.lig, styles._h_tignt_ta]}>
                       <span>
                         <img src={touxiang} alt="没" className={styles._h_tignt_tb} />
@@ -179,9 +187,8 @@ class Header extends React.Component {
   }
 }
 
-export default connect(
-  // state => {
-  //   return {};
-  // },
-  // () => {},
-)(Header);
+export default connect()(Header);
+// state => {
+//   return {};
+// },
+// () => {},

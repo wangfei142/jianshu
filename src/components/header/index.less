@@ -71,6 +71,7 @@
     li {
       cursor: pointer;
       padding: 0px 15px;
+      margin: 0px 5px;
     }
     display: flex;
     li:first-child {
@@ -91,11 +92,30 @@
         box-shadow: none;
       }
     }
+    ._header_input_wei {
+      height: 38px;
+      display: inline-flex;
+      border-radius: 40px;
+      margin-top: 6px;
+      border: 1px solid #f0f0f0;
+      overflow: hidden;
+      background: #eee;
+      input {
+        background: #eee;
+        width: 100%;
+        border-radius: 40px;
+        border: none;
+        // border-bottom: 1px solid white !important;
+        box-shadow: none;
+      }
+    
+    }
   }
   ._h_liright_ul {
     display: flex;
     li {
-      cursor: pointer;
+      padding: 0 10px;
+      // cursor: pointer;
     }
     ._h_right_li {
       text-align: center;
@@ -123,4 +143,40 @@
 
 .ant-dropdown-menu-item {
   color: #ea6f5a;
+}
+
+//组件里的样式
+:global(.rightimgtu a) {
+  padding: 10px 20px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #333;
+}
+
+:global(.rightimgtu span) {
+  margin-right: 15px;
+  font-size: 22px;
+  color: #ea6f5a;
+  vertical-align: middle;
+}
+._h_liright_register {
+  a {
+    float: right;
+    width: 80px;
+    height: 40px;
+    line-height: 35px;
+    margin: 5px 5px 0 15px;
+    border: 1px solid rgba(236, 97, 73, 0.7);
+    border-radius: 20px;
+    padding-left: 23px;
+    font-size: 15px;
+    color: #ea6f5a;
+    background-color: transparent;
+  }
+}
+._h_liright_login {
+  a {
+    background-color: transparent;
+    color: #969696 !important;
+  }
 }

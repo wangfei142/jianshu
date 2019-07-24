@@ -1,9 +1,9 @@
 import React from 'react'
-import WriteLeft from '../../components/writeleft/index'
 import styles from './index.less';
 import { Row, Col } from 'antd';
+import WriteLeft from '../../components/writeleft/index'
 import WriteMain from '../../components/writemain/index'
-
+import WriteRight from '../../components/writeright/index'
 
 class Write extends React.Component {
   render() {
@@ -12,8 +12,9 @@ class Write extends React.Component {
         <Row gutter={16} className={styles.gutterExample}>
 
           <WriteLeft></WriteLeft>
-          <Col className="gutter-row" span={20}>
+          <Col className={styles.gutterRow} span={20}>
             <WriteMain></WriteMain>
+            <WriteRight></WriteRight>
           </Col>
         </Row>
       </div>

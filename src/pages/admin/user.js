@@ -1,6 +1,6 @@
 // 用户管理
 
-import { Table, Button, Input, Radio, Popconfirm, Modal, Form, Cascader } from 'antd';
+import { Table, Button, Input, Popconfirm, Modal, Form, Cascader } from 'antd';
 import React from 'react';
 import { connect } from "dva"
 
@@ -13,25 +13,18 @@ class User extends React.Component {
   };
   // 表格列的数据表现
   columns = [
+
     {
-      title: '序号',
-      dataIndex: 'id',
-    },
-    {
-      title: '用户名',
-      dataIndex: 'username',
+      title: '用户手机',
+      dataIndex: 'phone',
     },
     {
       title: '用户昵称',
       dataIndex: 'nickname',
     },
     {
-      title: '性别',
-      dataIndex: 'sex',
-    },
-    {
       title: '会员等级',
-      dataIndex: 'member',
+      dataIndex: 'isvip',
     },
     {
       title: '操作',
@@ -53,9 +46,11 @@ class User extends React.Component {
             <Popconfirm
               title="请确认要删除么"
               onCancel={() => {
-                console.log('你点击取消');
               }}
               onConfirm={() => {
+                console.log(row);
+
+                this.props.delUser(row._id)
               }}
             >
               <Button type="danger" className={styles.bnt}>删除</Button>
@@ -70,19 +65,33 @@ class User extends React.Component {
    */
   options = [
     {
-      code: 'zhejiang',
-      name: 'Zhejiang',
+      code: 1,
+      name: 1,
 
     },
     {
-      code: 'jiangsu',
-      name: 'Jiangsu',
+      code: 2,
+      name: 2,
+
+    },
+    {
+      code: 3,
+      name: 3,
+
+    },
+    {
+      code: 4,
+      name: 4,
+
+    },
+    {
+      code: 5,
+      name: 5,
 
     },
   ];
 
   onChange = (value) => {
-    console.log(value);
   }
   handleOk = () => {
     // 1. 表单校验
@@ -118,12 +127,9 @@ class User extends React.Component {
           dataSource={this.props.data}
           columns={this.columns}
           pagination={{
-
-            onChange: (page, pageSize) => {
-              console.log(page, pageSize);
-            },
+            defaultPageSize: 5, // 默认每页显示多少
           }}
-          rowKey="id"
+          rowKey="_id"
         />
 
         <Modal
@@ -133,11 +139,6 @@ class User extends React.Component {
           onCancel={this.handleCancel}
         >
           <Form labelCol={{ span: 4, offset: 4 }} wrapperCol={{ span: 8 }}>
-            <Form.Item label="用户名">
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: '用户名必须要输入' }],
-              })(<Input />)}
-            </Form.Item>
             <Form.Item label="用户昵称">
               {getFieldDecorator('nickname', {
                 rules: [{ required: true, message: '用户昵称必须要输入' }],
@@ -154,16 +155,6 @@ class User extends React.Component {
               />)}
 
             </Form.Item>
-            <Form.Item label="学生性别">
-              {getFieldDecorator('sex', {
-                rules: [{ required: true, message: '性别必须要输入' }],
-              })(
-                <Radio.Group>
-                  <Radio value={1}>男</Radio>
-                  <Radio value={0}>女</Radio>
-                </Radio.Group>,
-              )}
-            </Form.Item>
           </Form>
         </Modal>
       </div>
@@ -171,6 +162,7 @@ class User extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getUser()
   }
 }
 
@@ -182,6 +174,21 @@ export default connect(
       data: state.user.data
     }
   },
-  null
+  (dispatch) => {
+    return {
+      getUser: () => {
+        dispatch({
+          type: 'user/getUser',
+        });
+      },
+      delUser: (id) => {
+        dispatch({
+          type: 'user/delUser',
+          id
+        });
+      },
+    }
+
+  }
 )(User)
 
