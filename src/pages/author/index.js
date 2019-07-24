@@ -1,6 +1,6 @@
-import Collection from '../collection/index.js';
+import Collection from '../subscriptions/collection.js';
 import React from 'react';
-import style from './index.less'
+import style from './author.less'
 import { Icon, Divider } from 'antd'
 
 export default class Author extends React.Component {

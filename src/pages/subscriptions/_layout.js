@@ -1,8 +1,7 @@
 import React, { Children } from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import styles from './index.less';
-import Timeline from './timeline/index.js';
-import Collection from './collection/index.js';
+import NavLink from 'umi/navlink';
 
 
 const menu = (
@@ -28,6 +27,9 @@ const menu = (
 
 
 export default class Attention extends React.Component {
+  subscribe(props){
+
+  }
 
   render() {
     return (
@@ -54,15 +56,14 @@ export default class Attention extends React.Component {
           {/* 滑动列表 */}
           <div className={styles.peopleUl}>
             <ul>
-              <li><span><img src="https://upload.jianshu.io/users/upload_avatars/12201495/99e24aee-75fe-4bff-abcd-153a150c5991?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>Elvmx</span></li>
-              <li><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></li>
-              <li><span><img src="https://upload.jianshu.io/users/upload_avatars/12201495/99e24aee-75fe-4bff-abcd-153a150c5991?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>Elvmx</span></li>
-              <li><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></li>
+              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/12201495/99e24aee-75fe-4bff-abcd-153a150c5991?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>Elvmx</span></NavLink></li>
+              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></NavLink></li>
+              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/12201495/99e24aee-75fe-4bff-abcd-153a150c5991?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>Elvmx</span></NavLink></li>
+              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></NavLink></li>
             </ul>
           </div>
         </div>
-        {/* <Timeline></Timeline> */}
-        <Collection ></Collection>
+        {this.props.children}
       </div>
     )
   }
