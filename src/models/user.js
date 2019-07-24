@@ -12,7 +12,7 @@ export default {
   // 异步
   effects: {
     *getUser(action, { put }) {
-      let response = yield axios.post('http://localhost:8080/api/user/getuser');
+      let response = yield axios.post('http://10.36.140.11:8080/api/user/getuser');
       let res = yield response.data;
       yield put({ type: 'setUser', data: res.data.list });
     },
