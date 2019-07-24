@@ -30,7 +30,10 @@ class Login extends Component {
           <Form onSubmit={this.handleSubmit} className={styles.login_form}>
             <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
               {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [
+                  { required: true, message: '请输入手机号!' },
+                  { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号!' },
+                ],
               })(
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -40,7 +43,7 @@ class Login extends Component {
             </Form.Item>
             <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+                rules: [{ required: true, message: '请输入密码!' }],
               })(
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -106,7 +109,6 @@ class Login extends Component {
         let _this = this;
 
         setTimeout(() => {
-          console.log(_this.props.listdata.code,"登录失败没数据网络连接失败");
           if (_this.props.listdata.code === 0) {
             message.success('登录成功');
             _this.props.history.push('/');
@@ -118,10 +120,6 @@ class Login extends Component {
     });
   };
 }
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login);
-
-
-
 const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(Login);
 
 export default connect(
@@ -138,4 +136,3 @@ export default connect(
     header_title: name => ({ type: 'user/loginOperation', name }),
   },
 )(WrappedHorizontalLoginForm);
-

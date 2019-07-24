@@ -13,8 +13,9 @@ class Login extends Component {
   render() {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-    const usernameError = isFieldTouched('username') && getFieldError('username');
+    const usernameError = isFieldTouched('author') && getFieldError('author');
     const passwordError = isFieldTouched('password') && getFieldError('password');
+    const phoneError = isFieldTouched('phone') && getFieldError('phone');
     return (
       <div className={styles._login_body}>
         <div className={styles._login_main}>
@@ -31,7 +32,8 @@ class Login extends Component {
               {getFieldDecorator('author', {
                 rules: [
                   { required: true, message: '请输入昵称!' },
-                  // { pattern: [\u4e00-\u9fa5], message: '请输入昵称!' }
+                  { pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+$/, message: '非特殊符号!' },
+                  { max: 8, message: '昵称过长！' },
                 ],
               })(
                 <Input
@@ -41,9 +43,12 @@ class Login extends Component {
               )}
             </Form.Item>
             {/* 手机号 */}
-            <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+            <Form.Item validateStatus={phoneError ? 'error' : ''} help={phoneError || ''}>
               {getFieldDecorator('phone', {
-                rules: [{ required: true, message: '请输入手机号!' }],
+                rules: [
+                  { required: true, message: '请输入手机号!' },
+                  { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号!' },
+                ],
               })(
                 <Input
                   prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -54,7 +59,13 @@ class Login extends Component {
             {/* 密码 */}
             <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码!' }],
+                rules: [
+                  { required: true, message: '请输入密码!' },
+                  {
+                    pattern: /(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/,
+                    message: '必须数字和字母组合，长度8-16位!',
+                  },
+                ],
               })(
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}

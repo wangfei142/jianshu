@@ -85,30 +85,24 @@ class SubjectList extends Component {
     super(props);
     this.state = {};
   }
-
-  //失败路由无法跳转
-  // header_title(data) {
-  //   console.log(data);
-  // }
-
   render() {
     return (
       <div>
-        <ul className={styles._header_list}>     
-        <Banner />    
-          {listdata.map(item => {
+        <ul className={styles._header_list}>
+          <Banner />
+          {this.props.activeList.map(item => {
             return (
-              <li key={item.id}>
+              <li key={item._id}>
                 <div>
                   <Navlink
-                    to="cketch"
+                    to={"/p/" + item._id}
                     onClick={() => {
                       this.props.header_title(item.id);
                     }}
                   >
                     {item.title}
                   </Navlink>
-                  <p>{item.data}</p>
+                  <p>{this.removeHTMLTag(item.data)}</p>
                   <div>
                     <span>
                       <Icon type="sketch" />
@@ -140,13 +134,29 @@ class SubjectList extends Component {
       </div>
     );
   }
+  removeHTMLTag = (str) => {
+    str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+    str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+    //str = str.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
+    str = str.replace(/ /ig, '');//去掉
+    return str;
+  }
+  componentWillMount() {
+    this.props.getArticle()
+  }
 }
 
 export default connect(
-  null,
+  state => {
+    return {
+      activeList: state.article.activeList
+    }
+  }
+  ,
   //向仓库传方法
   {
     header_title: tableDataId => ({ type: 'article/tableDataOperation', tableDataId }),
+    getArticle: () => ({ type: 'article/getArticle' })
   },
 
 )(SubjectList);
