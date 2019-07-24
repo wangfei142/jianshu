@@ -97,11 +97,20 @@ class User extends React.Component {
     // 1. 表单校验
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        alert('ok');
+        console.log(this.state.curUserInfo);
+
         // // 2. ajax 请求
-        // let id = this.state.curUserInfo.id;
-        // let userInfo = values;
-        // this.props.updateStu(id, userInfo);
+        let id = this.state.curUserInfo._id;
+        let userInfo = {
+          nickname: values.nickname,
+          isvip: values.isvip[0]
+        };
+        let obj = {
+          id,
+          userInfo
+        }
+        this.props.updateUser(JSON.stringify(obj));
+
         // 关闭弹窗
         this.setState({
           visible: false,
@@ -145,7 +154,7 @@ class User extends React.Component {
               })(<Input />)}
             </Form.Item>
             <Form.Item label="会员等级">
-              {getFieldDecorator('member', {
+              {getFieldDecorator('isvip', {
                 rules: [{ required: true, message: '会员等级必须要输入' }],
               })(<Cascader
                 fieldNames={{ label: 'name', value: 'code' }}
@@ -176,17 +185,23 @@ export default connect(
   },
   (dispatch) => {
     return {
-      getUser: () => {
+      getUser: () => {  //获取用户
         dispatch({
           type: 'user/getUser',
         });
       },
-      delUser: (id) => {
+      delUser: (id) => { //删除用户
         dispatch({
           type: 'user/delUser',
           id
         });
       },
+      updateUser: (data) => {
+        dispatch({
+          type: 'user/updateUser',
+          data
+        });
+      }
     }
 
   }

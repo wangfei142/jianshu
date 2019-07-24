@@ -7,7 +7,6 @@ export default {
     tableDataId: '',
     activeList: [],  // 文章列表
     commentList: [],  // 评论列表
-    compilationsList: []    //  文章评论合集
   },
 
   effects: {
@@ -35,6 +34,12 @@ export default {
     //删除文章
     *delArticle(action, { put }) {
       let response = yield axios.delete(`http://10.36.140.11:8080/api/article/${action.id}`);
+      let res = yield response.data;
+      yield put({ type: 'getArticle' });
+    },
+    //删除评论
+    *delomment(action, { put }) {
+      let response = yield axios.delete(`http://10.36.140.11:8080/api/comment/${action.id}`);
       let res = yield response.data;
       yield put({ type: 'getArticle' });
     },
@@ -66,28 +71,31 @@ export default {
       let commentList = [...state.commentList];
       let activeList = [...state.activeList];
       let newList = [];
-      commentList.forEach(c => {
-        console.log(c);
-        let title = c.title;
+      commentList.forEach(comm => {
+        let title = comm.title;
         let index = newList.findIndex(item => item.title === title);
         if (index > -1) {
-          newList[index].comment.push(c);
+          newList[index].comment.push(comm);
         } else {
           let obj = {
             title,
-            comment: [c]
+            comment: [comm]
           };
           newList.push(obj);
         }
       });
-      console.log(newList);
-
-
+      activeList.map(val => {
+        newList.map(val2 => {
+          if (val.title === val2.title) {
+            return Object.assign(val, val2);
+          }
+        })
+      });
 
       return {
         ...state,
         ...{
-          compilationsList: newList,
+          activeList: activeList,
         },
       };
     },

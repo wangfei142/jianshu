@@ -31,7 +31,7 @@ class NestedTable extends React.Component {
 
       {
         title: '评论人',
-        dataIndex: 'username',
+        dataIndex: 'author',
       },
       {
         title: '评论时间',
@@ -48,11 +48,11 @@ class NestedTable extends React.Component {
             <Popconfirm
               title="请确认要删除么"
               onCancel={() => {
-                console.log(row._id);
+                console.log(record._id);
               }}
-              onConfirm={(row) => {
-                console.log(row._id);
-
+              onConfirm={() => {
+                console.log(record._id);
+                this.props.delComment(record._id)
               }}
             >
               <Button type="danger" className={styles.bnt}>删除</Button>
@@ -177,9 +177,15 @@ export default connect(
           type: 'article/getArticle',
         });
       },
-      delArticle: (id) => {
+      delArticle: (id) => { // 删除评论
         dispatch({
           type: 'article/delArticle',
+          id
+        });
+      },
+      delComment: (id) => {  //  删除评论
+        dispatch({
+          type: 'article/delComment',
           id
         });
       },
