@@ -7,6 +7,7 @@ export default {
     tableDataId: '',
     activeList: [],  // 文章列表
     commentList: [],  // 评论列表
+    compilationsList: []    //  文章评论合集
   },
 
   effects: {
@@ -59,6 +60,20 @@ export default {
         },
       };
     },
+    // 设置评论列表
+    setCompilationsList(state, action) {
+      let sArr = new Set();
+
+
+      return {
+        ...state,
+        ...{
+          commentList: action.commentList,
+        },
+      };
+    },
+
+
     tableDataOperation(state, action) {
       console.log(action.tableDataId);
       return {
