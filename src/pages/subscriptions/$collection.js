@@ -4,12 +4,19 @@ import styles from '../index.less';
 import styless from './collection.less';
 // import Timeline from '../timeline/index.js'
 import NavLink from 'umi/navlink';
-
+import { connect } from 'dva'
 import { Modal, Input } from 'antd';
 
 
 class App extends React.Component {
-  state = { visible: false };
+  constructor(props) {
+    super()
+    this.state = {
+      visible: false,
+      list: []
+    }
+  }
+
 
   showModal = () => {
     this.setState({
@@ -18,10 +25,20 @@ class App extends React.Component {
   };
 
   handleOk = e => {
-    console.log(e);
+    // console.log(e);
+    var lists = [];
+    console.log(this.refs.Value.state);
+    console.log(this.props.bookList, this.props.list)
+    this.props.bookList.map(item => {
+      if(item.title.indexOf(this.refs.Value.state)<0){
+        lists.push(item)
+        console.log(lists);
+      }
+    })
     this.setState({
-      visible: false,
-    });
+      list:lists
+    })
+    console.log(this.list);
   };
 
   handleCancel = e => {
@@ -41,9 +58,11 @@ class App extends React.Component {
           onCancel={this.handleCancel}
         >
           <p>每篇文章有总共有5次投稿机会</p>
-          <Input placeholder="搜索我的文章"></Input>
+          <Input placeholder="搜索我的文章" ref='Value'></Input>
           <div>
+            <div>
 
+            </div>
           </div>
         </Modal>
       </div>
@@ -52,7 +71,13 @@ class App extends React.Component {
 }
 
 
-export default class Collection extends React.Component {
+class Collection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: '',
+    }
+  }
   render() {
     return (
       // author 介绍
@@ -69,7 +94,9 @@ export default class Collection extends React.Component {
 
             <div>
               <div className={styless.authorOne}>
-                <App />
+                <App bookList={this.props.bookList} list={this.state.id} />
+
+
                 <span><NavLink to="/author"> 专题主页<i className={styless.ico}>></i></NavLink></span>
               </div>
             </div>
@@ -97,7 +124,7 @@ export default class Collection extends React.Component {
 
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
@@ -108,7 +135,7 @@ export default class Collection extends React.Component {
 
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
@@ -119,7 +146,19 @@ export default class Collection extends React.Component {
 
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
+                    <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
+                    <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
+                  </div>
+                  <div className={styless.autohrImg}>
+                    <img src="https://upload-images.jianshu.io/upload_images/445173-b9c094c38e3b91ca.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp" alt="" />
+                  </div>
+                </li>
+
+
+                <li className={styless.atrico}>
+                  <div>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
@@ -130,7 +169,7 @@ export default class Collection extends React.Component {
 
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
@@ -141,7 +180,19 @@ export default class Collection extends React.Component {
 
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
+                    <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
+                    <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
+                  </div>
+                  <div className={styless.autohrImg}>
+                    <img src="https://upload-images.jianshu.io/upload_images/445173-b9c094c38e3b91ca.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp" alt="" />
+                  </div>
+                </li>
+
+
+                <li className={styless.atrico}>
+                  <div>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
@@ -152,7 +203,7 @@ export default class Collection extends React.Component {
 
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
@@ -161,27 +212,6 @@ export default class Collection extends React.Component {
                   </div>
                 </li>
 
-                <li className={styless.atrico}>
-                  <div>
-                    <p>三种人学不好编程</p>
-                    <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
-                    <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
-                  </div>
-                  <div className={styless.autohrImg}>
-                    <img src="https://upload-images.jianshu.io/upload_images/445173-b9c094c38e3b91ca.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp" alt="" />
-                  </div>
-                </li>
-
-                <li className={styless.atrico}>
-                  <div>
-                    <p>三种人学不好编程</p>
-                    <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
-                    <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
-                  </div>
-                  <div className={styless.autohrImg}>
-                    <img src="https://upload-images.jianshu.io/upload_images/445173-b9c094c38e3b91ca.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp" alt="" />
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -189,4 +219,44 @@ export default class Collection extends React.Component {
       </div>
     )
   }
+  componentDidMount() {
+    this.setState({
+      id: this.props.computedMatch.params.collection.split('collection')[0]
+    }
+    )
+    console.log(this.state.id);
+    this.props.getArticle();
+    this.props.getUser();
+    //   // setTimeout( asd =>{
+    //   //   console.log(this.props.UserList);
+    //   //   console.log(this.props.bookList);
+    //   // },1000);
+
+  }
 }
+
+
+export default connect(
+
+  (state) => {
+    return {
+      UserList: state.user.data,
+      bookList: state.article.activeList,
+    }
+  },
+  (dispatch) => {
+    return {
+      getArticle: () => {
+        dispatch({
+          type: 'article/getArticle'
+        })
+      },
+      getUser: () => {
+        dispatch({
+          type: 'user/getUser',
+        })
+      }
+    }
+  },
+)(Collection)
+

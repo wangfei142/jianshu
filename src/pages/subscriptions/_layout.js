@@ -2,6 +2,7 @@ import React, { Children } from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import styles from './index.less';
 import NavLink from 'umi/navlink';
+import { connect } from 'dva'
 
 
 const menu = (
@@ -26,12 +27,8 @@ const menu = (
 );
 
 
-export default class Attention extends React.Component {
-  subscribe(props){
-
-  }
-
-  render() {
+ class Attention extends React.Component {
+    render() {
     return (
       //全局div
       <div className={styles.content}>
@@ -56,10 +53,15 @@ export default class Attention extends React.Component {
           {/* 滑动列表 */}
           <div className={styles.peopleUl}>
             <ul>
+              { this.props.UserList.map( item => {
+                return (
+                  <li><NavLink to={`/subscriptions/${ item.nickname }collection`}><span><img src={item.avatar} alt="" /></span><span>{ item.nickname }</span></NavLink></li>
+                )
+              } ) }
+              
+              {/* <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></NavLink></li>
               <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/12201495/99e24aee-75fe-4bff-abcd-153a150c5991?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>Elvmx</span></NavLink></li>
-              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></NavLink></li>
-              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/12201495/99e24aee-75fe-4bff-abcd-153a150c5991?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>Elvmx</span></NavLink></li>
-              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></NavLink></li>
+              <li><NavLink to="/subscriptions/collection"><span><img src="https://upload.jianshu.io/users/upload_avatars/2257137/2f5807dc-47a5-43f7-b1f1-6607bd243702.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120/format/webp" alt="" /></span><span>四小七</span></NavLink></li> */}
             </ul>
           </div>
         </div>
@@ -67,6 +69,28 @@ export default class Attention extends React.Component {
       </div>
     )
   }
+  
+  componentDidMount(){
+    this.props.getUser();
+  }
+
 
 }
+
+export default connect (
+  (state) => {
+    return {
+    UserList:state.user.data,
+    }
+  },
+  (dispatch) => {
+    return {
+      getUser:() =>{
+        dispatch({
+          type:'user/getUser',
+        })
+      }
+    }
+  }
+)(Attention);
 
