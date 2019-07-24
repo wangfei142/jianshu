@@ -65,8 +65,10 @@ class WriteRight extends React.Component {
     }
     this.setState({ loading: !this.state.loading })
     let time = new Date().toLocaleDateString() + new Date().toLocaleTimeString()
+    let author = JSON.parse(window.localStorage.getItem('loginMethod')).nickname
+    console.log(author)
     let data = {
-      author: '李金益',
+      author: author,
       title: this.state.activeTitle,
       data: this.state.text,
       posted_time: time
