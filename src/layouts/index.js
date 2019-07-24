@@ -24,11 +24,8 @@ export default props => {
     props.location.pathname === '/admin/article' ||
     props.location.pathname === '/write') {
     if (!window.localStorage.getItem('loginMethod')) {
-      router.push('/')
-      message.info('先登录才能执行操作，2秒后跳转....')
-      setTimeout(() => {
-        router.push('/login')
-      }, 2000);
+      message.info('先登录才能执行操作')
+      router.push('/login')
     } else {
       return <ArticleFrom {...props} />
     }
