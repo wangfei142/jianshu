@@ -11,7 +11,13 @@ export default {
   },
 
   effects: {
-
+    //获取详情文章
+    *getActionInfo(action, { put, select }) {
+      let data = yield select(state => state.article.activeList)
+      return data.filter(item =>
+        item._id === action.id
+      )
+    },
     //获取评论
     *getComment(action, { put }) {
       let response = yield axios.get('http://10.36.140.11:8080/api/comment');
@@ -67,7 +73,6 @@ export default {
       let activeList = [...state.activeList];
       let newList = [];
       commentList.forEach(c => {
-        console.log(c);
         let title = c.title;
         let index = newList.findIndex(item => item.title === title);
         if (index > -1) {
@@ -80,7 +85,6 @@ export default {
           newList.push(obj);
         }
       });
-      console.log(newList);
 
 
 

@@ -1,6 +1,7 @@
 import styles from './index.less';
 import Header from '../components/header/index';
 import Logout from '../components/header/logout ';
+import { connect } from 'dva';
 function BasicLayout(props) {
   let list = window.localStorage.getItem('loginMethod');
   return (

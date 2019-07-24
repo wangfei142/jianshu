@@ -196,8 +196,6 @@ export default connect(
   state => {
     return {
       headerImg: state.user.loginMethod,
-
     };
-  },
-  () => { },
+  }, null
 )(Header);
