@@ -95,7 +95,7 @@ class SubjectList extends Component {
               <li key={item._id}>
                 <div>
                   <Navlink
-                    to="cketch"
+                    to={"/p/" + item._id}
                     onClick={() => {
                       this.props.header_title(item.id);
                     }}
