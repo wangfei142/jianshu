@@ -8,11 +8,13 @@
   width:280px;
   height:100%;
   font-size: 15px;
-  margin-top:20px;
+  margin-top:-10px;
 }
 .right{
   float: right;
-  width:600px;
+  // width:600px;
+  margin-top:-10px;
+  margin-left:-20px;
 }
 .leftContent{
   padding-bottom:5px;
@@ -95,7 +97,7 @@
   height:100%;
 }
 .noteList{
-  margin-top:50px;
+  margin-top:40px;
 }
 .title{
   // float: left;
@@ -152,5 +154,21 @@
   color: #b4b4b4;
 }
 .rightLi{
-  margin:15px 0px 30px 0px;
+  margin:15px 0px 60px 0px;
+}
+.rightLi::after{
+  content: "";
+  width:100%;
+  height:1px;
+  position: absolute;
+  background-color: #F0F0F0;
+  // margin-bottom:20px;
+}
+.bottom{
+  margin-bottom:29px;
+}
+.peopleUl ul li a{
+  width:100%;
+  height:100%;
+  display: block;
 }

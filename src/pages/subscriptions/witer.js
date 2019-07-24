@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
-import style from './index.less';
+import style from './witer.less';
 
 export default class Witer extends React.Component {
   render() {

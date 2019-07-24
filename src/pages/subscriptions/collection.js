@@ -1,8 +1,9 @@
 import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import styles from '../index.less';
-import styless from './index.less';
+import styless from './collection.less';
 // import Timeline from '../timeline/index.js'
+import NavLink from 'umi/navlink';
 
 import { Modal, Input } from 'antd';
 
@@ -69,7 +70,7 @@ export default class Collection extends React.Component {
             <div>
               <div className={styless.authorOne}>
                 <App />
-                <span><a href=""> 专题主页<i className={styless.ico}>></i></a></span>
+                <span><NavLink to="/author"> 专题主页<i className={styless.ico}>></i></NavLink></span>
               </div>
             </div>
             {/* 选项卡 */}
@@ -85,7 +86,7 @@ export default class Collection extends React.Component {
               <ul className={styless.xain}>
                 <li className={styless.atrico}>
                   <div>
-                    <p>三种人学不好编程</p>
+                    <p className={styless.tiaozhuan}><NavLink to="/detail">三种人学不好编程</NavLink></p>
                     <p className={styless.contented}>很多人都觉得编程入门特别难，特别在刚开始的时候，敢问切入一个新的行业不付出点努力，不坚持下不深刻的挖掘下自己的潜力，都会觉得难得不行。...</p>
                     <p><span>东辉在线</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                   </div>
