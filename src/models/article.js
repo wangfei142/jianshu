@@ -10,7 +10,13 @@ export default {
   },
 
   effects: {
-
+    //获取详情文章
+    *getActionInfo(action, { put, select }) {
+      let data = yield select(state => state.article.activeList)
+      return data.filter(item =>
+        item._id === action.id
+      )
+    },
     //获取评论
     *getComment(action, { put }) {
       let response = yield axios.get('http://10.36.140.11:8080/api/comment');
@@ -84,6 +90,7 @@ export default {
           newList.push(obj);
         }
       });
+
       activeList.map(val => {
         newList.map(val2 => {
           if (val.title === val2.title) {

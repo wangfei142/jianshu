@@ -1,6 +1,10 @@
 import styles from './index.less';
 import Header from '../components/header/index';
 import Logout from '../components/header/logout ';
+import { connect } from 'dva';
+import router from 'umi/router'
+import { message } from 'antd';
+
 function BasicLayout(props) {
   let list = window.localStorage.getItem('loginMethod');
   return (
@@ -15,15 +19,22 @@ function ArticleFrom(props) {
 }
 
 export default props => {
+  if (props.location.pathname === '/admin' ||
+    props.location.pathname === '/admin/user' ||
+    props.location.pathname === '/admin/article' ||
+    props.location.pathname === '/write') {
+    if (!window.localStorage.getItem('loginMethod')) {
+      message.info('先登录才能执行操作')
+      router.push('/login')
+    } else {
+      return <ArticleFrom {...props} />
+    }
+  }
+
   if (
     props.location.pathname === '/login' ||
-    props.location.pathname === '/sign' ||
-    props.location.pathname === '/write' ||
-    props.location.pathname === '/admin' ||
-    props.location.pathname === '/admin/user' ||
-    props.location.pathname === '/admin/article'
-  ) {
-    return <ArticleFrom {...props} />;
+    props.location.pathname === '/sign') {
+    return <ArticleFrom {...props} />
   }
   return <BasicLayout {...props} />;
 };
