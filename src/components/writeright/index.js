@@ -2,25 +2,29 @@ import React from 'react';
 import styles from './index.less'
 import { Col, Button, message } from 'antd'
 import { connect } from 'dva'
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
 import axios from 'axios'
 import router from 'umi/router'
+import BraftEditor from 'braft-editor'
+import 'braft-editor/dist/index.css'
+
 
 class WriteRight extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      editorState: '',
       loading: false,
-      text: '',
       activeTitle: '',
     }
-    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(value) {
-    this.setState({ text: value })
+
+  handleEditorChange = (editorState) => {
+    this.setState({ editorState })
   }
+
+
+
 
   modules = {
     toolbar: [
@@ -45,13 +49,12 @@ class WriteRight extends React.Component {
           <input type="text" value={this.activeTitle} onChange={this.handleChgTitle} className={styles.titleInpuut} />
         </div>
         <div className={styles.quillTxt}>
-          <ReactQuill theme="snow"
-            modules={this.modules}  //调用方法
-            formats={this.formats}  //调用官方组件
-            onChange={this.handleChange}  //事件函数
-          >
-          </ReactQuill>
+          <BraftEditor
+            value={this.state.editorState}
+            onChange={this.handleEditorChange}
+          />
         </div>
+        <div></div>
         <Button type="primary" block onClick={this.setActive} loading={this.state.loading}>
           发布文章
         </Button>
@@ -70,10 +73,10 @@ class WriteRight extends React.Component {
     let data = {
       author: author,
       title: this.state.activeTitle,
-      data: this.state.text,
+      data: this.state.editorState.toHTML(),
       posted_time: time
     }
-    axios.post('http://10.36.140.11:8080/api/article', JSON.stringify(data))
+    axios.post('http://localhost:8080/api/article', JSON.stringify(data))
       .then(response => {
         this.setState({ loading: !this.state.loading })
         message.success('发布成功');
