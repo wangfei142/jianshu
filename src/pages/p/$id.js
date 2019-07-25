@@ -62,8 +62,6 @@ class ActiveInit extends React.Component {
         console.log(1)
       })
   }
-
-
 }
 
 export default connect()(ActiveInit)
