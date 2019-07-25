@@ -27,7 +27,7 @@ export default {
     // 修改用户信息
     *updateUser(action, { put }) {
       console.log(action.data);
-      let response = yield axios.post(`http://10.36.140.11:8080/api/user/amend`, action.data);
+      let response = yield axios.post(`http://10.36.140.11:8080/api/user/amendvip`, action.data);
       let res = yield response.data;
       console.log(res);
       yield put({ type: 'getUser' });

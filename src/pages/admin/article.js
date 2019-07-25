@@ -109,6 +109,7 @@ class NestedTable extends React.Component {
                 visible: true,
                 article: record.data,
                 title: record.title
+
               });
             }}
           >
@@ -138,7 +139,7 @@ class NestedTable extends React.Component {
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
-        <p>{this.state.article}</p>
+        <div dangerouslySetInnerHTML={{ __html: this.state.article }}></div>
       </Modal>
       <Table
         className="components-table-demo-nested"
