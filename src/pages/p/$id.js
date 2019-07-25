@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.less'
-import { Icon, Comment, Avatar, Input, Button } from 'antd';
+import { Icon, Comment, Avatar, Input, Button, message } from 'antd';
 import { connect } from 'dva'
 import axios from 'axios'
 
@@ -9,7 +9,10 @@ const { TextArea } = Input;
 class ActiveInit extends React.Component {
   state = {
     activeDate: {},
-    contentDate: ''
+    contentDate: '',
+    commentList: {},
+    havaData: false,
+    commentTxt: ''
   }
   render() {
     return (
@@ -49,33 +52,42 @@ class ActiveInit extends React.Component {
           <div className={styles.comment}>
             {/* 发布评论 */}
             <div className={styles.issueComment}>
-              <TextArea rows={4} placeholder='请输入你的看法' />
+              <TextArea rows={4} placeholder='请输入你的看法' value={this.state.commentTxt} onChange={this.setComment} />
               <div className={styles.commentBtn}>
-                <Button type="danger" block>
+                <Button type="danger" block onClick={this.postComment}>
                   发布文章
                 </Button>
               </div>
             </div>
             {/* 评论 */}
             <div className={styles.contentComment}>
-              <Comment
-                author={<a>Han Solo</a>}  //评论者
-                avatar={                  //头像
-                  <Avatar
-                    size={36} icon="user"
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                    alt="Han Solo"
-                  />
-                }
-                content={                 //评论内容
-                  <p>
-                    We supply a series of design principles, practical patterns and high quality design
-                    resources (Sketch and Axure), to help people create their product prototypes beautifully
-                    and efficiently.
-                  </p>
-                }
+              {this.state.havaData ? this.state.commentList.map(item => {
+                return (
+                  <div key={item._id}>
+                    <Comment
+                      datetime={item.retime}
+                      author={<a>{item.author}</a>}  //评论者
+                      avatar={                  //头像
+                        <Avatar
+                          size={36} icon="user"
+                          src={item.avatar}
+                          alt={item.author}
+                        />
+                      }
+                      content={                 //评论内容
+                        <p>
+                          {item.content}
+                        </p>
+                      }
 
-              />
+                    />
+                  </div>
+                )
+              }) : 'loading'
+              }
+
+
+
             </div>
           </div>
         </div>
@@ -96,11 +108,62 @@ class ActiveInit extends React.Component {
       .then(response => {
         this.setState({ activeDate: response.data.data })
         this.setState({ contentDate: response.data.data.data })
+        this.props.getComment()
+        this.filterComment()
       }).catch(error => {
       })
+
   }
-
-
+  filterComment = () => {  //过滤评论
+    axios.get('http://10.36.140.11:8080/api/comment')
+      .then(response => {
+        let list = response.data.data.list.filter(item => {
+          return item.id === this.props.match.params.id
+        })
+        this.setState({ commentList: list })
+        this.setState({ havaData: true })
+      }
+      )
+  }
+  setComment = (e) => {   //发布评论区
+    this.setState({ commentTxt: e.target.value })
+  }
+  postComment = () => {
+    if (this.state.commentTxt == '') {
+      message.warning('请输入内容');
+    }
+    let time = new Date().toLocaleDateString() + new Date().toLocaleTimeString()  //获取评论时间
+    let author = JSON.parse(window.localStorage.getItem('loginMethod')).nickname  //获取评论用户
+    let id = this.props.match.params.id                                           //获取评论id
+    let contentTxt = this.state.commentTxt                                        //获取评论内容
+    let data = {
+      id: id,   // 评论文章的id
+      author: author,   // 评论人
+      retime: time,   // 评论时间
+      content: contentTxt   // 评论内容
+    }
+    axios.post('http://10.36.140.11:8080/api/comment', JSON.stringify(data))
+      .then(response => {
+        this.setState({ commentTxt: '' })
+        this.props.getComment()
+        this.filterComment()
+        message.success('发布成功')
+      }
+      )
+      .catch(error => {
+        message.error('网络连接错误')
+      }
+      )
+  }
 }
 
-export default connect()(ActiveInit)
+export default connect(
+  state => {
+    return {
+      commentList: state.article.commentList
+    }
+  }
+  , {
+    getComment: () => ({ type: 'article/getComment' }),
+  }
+)(ActiveInit)
