@@ -112,7 +112,6 @@ class ActiveInit extends React.Component {
         this.filterComment()
       }).catch(error => {
       })
-
   }
   filterComment = () => {  //过滤评论
     axios.get('http://10.36.140.11:8080/api/comment')

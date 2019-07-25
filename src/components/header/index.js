@@ -128,8 +128,6 @@ class Header extends React.Component {
   };
 
   render() {
-    console.log(this.state.headerImg);
-
     const { Search } = Input;
     return (
       <div className={styles._header_top}>
@@ -162,7 +160,11 @@ class Header extends React.Component {
                     </li>
                   </Dropdown>
                   <li className={styles._header_input}>
-                    <Search placeholder="搜索" onSearch={value => console.log(value)} />
+                    <Search placeholder="搜索"
+                      onSearch={value => {
+                        this.SearchArticleList(value)
+                      }}
+                    />
                   </li>
                 </ul>
               </li>
@@ -195,12 +197,35 @@ class Header extends React.Component {
       </div>
     );
   }
+  SearchArticleList = (value) => {
+    console.log(this);
+    let tmp = [];
+    if (value) {
+      tmp = this.props.articleList.filter(item => {
+        return item.title.indexOf(value) > -1 || item.author.indexOf(value) > -1 || item.data.indexOf(value) > -1;
+      });
+    }
+    this.props.searchArticle(tmp)
+    console.log(tmp);
+  }
 }
 
 export default connect(
   state => {
     return {
       headerImg: state.user.loginMethod,
+      articleList: state.article.activeList
     };
-  }, null
+  },
+  dispatch => {
+    return {
+      searchArticle: (tmp) => {
+        dispatch({
+          type: 'article/searchArticle',
+          tmp
+        })
+      }
+
+    }
+  }
 )(Header);

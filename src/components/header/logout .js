@@ -29,7 +29,7 @@ class Header extends React.Component {
                     &nbsp;下载
                   </li>
                   <li className={styles._header_input_wei}>
-                    <Search placeholder="搜索" onSearch={value => console.log(value)} />
+                    <Search placeholder="搜索" onSearch={value => this.SearchArticleList(value)} />
                   </li>
                 </ul>
               </li>
@@ -59,11 +59,34 @@ class Header extends React.Component {
       </div>
     );
   }
+  SearchArticleList = (value) => {
+    console.log(this);
+    let tmp = [];
+    if (value) {
+      tmp = this.props.articleList.filter(item => {
+        return item.title.indexOf(value) > -1 || item.author.indexOf(value) > -1 || item.data.indexOf(value) > -1;
+      });
+    }
+    this.props.searchArticle(tmp)
+    console.log(tmp);
+  }
 }
 
 export default connect(
+  state => {
+    return {
+      articleList: state.article.activeList
+    };
+  },
+  dispatch => {
+    return {
+      searchArticle: (tmp) => {
+        dispatch({
+          type: 'article/searchArticle',
+          tmp
+        })
+      }
+
+    }
+  }
 )(Header);
-// state => {
-//   return {};
-// },
-// () => {},

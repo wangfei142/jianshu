@@ -55,7 +55,7 @@ const menu = (
             <ul>
               { this.props.UserList.map( item => {
                 return (
-                  <li><NavLink to={`/subscriptions/${ item.nickname }collection`}><span><img src={item.avatar} alt="" /></span><span>{ item.nickname }</span></NavLink></li>
+                  <li key={item._id}><NavLink to={`/subscriptions/collection/${ item.nickname }`} key={ this.props.location.pathname } ><span className={styles.listimg}><img src={item.avatar} alt="" /></span><span>{ item.nickname }</span></NavLink></li>
                 )
               } ) }
               
@@ -72,6 +72,9 @@ const menu = (
   
   componentDidMount(){
     this.props.getUser();
+  };
+  reload(){
+    
   }
 
 
