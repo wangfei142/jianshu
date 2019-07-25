@@ -1,17 +1,29 @@
-import styles from "./index.less"
+import styles from './index.less';
+import React from 'react';
 
-const Header = () => {
-  return (
-    <div className={styles.wrap}>
-      <div className={styles.left}>你好</div>
-      <div className={styles.right}>
-        <div>设置</div>
-        <div>修改</div>
-        <div className={styles.userInfo}>用户信息</div>
+class Header extends React.Component {
+  state = {
+    headerImg: window.localStorage.getItem('loginMethod')
+      ? JSON.parse(window.localStorage.getItem('loginMethod'))
+      : [],
+  };
+  render() {
+    return (
+      <div className={styles.wrap}>
+        <div className={styles.left}>
+          <a href="/">回首页</a>
+        </div>
+        <div className={styles.right}>
+          <div className={styles.userInfo}>
+            来了啊 <span>{this.state.headerImg.nickname}</span> 大爷
+          </div>
+          <div className={styles.avatar}>
+            <img src={this.state.headerImg.avatar} alt="" />
+          </div>
+        </div>
       </div>
-
-    </div>
-  )
+    );
+  }
 }
 
 export default Header;
