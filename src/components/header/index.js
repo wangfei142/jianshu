@@ -128,8 +128,6 @@ class Header extends React.Component {
   };
 
   render() {
-    console.log(this.state.headerImg);
-
     const { Search } = Input;
     return (
       <div className={styles._header_top}>
