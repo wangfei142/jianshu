@@ -1,13 +1,29 @@
-import Collection from '../subscriptions/$collection.js';
+import Collection from '../subscriptions/collection/$id.js';
 import React from 'react';
 import style from './author.less'
 import { Icon, Divider } from 'antd'
+import { connect } from 'dva'
 
-export default class Author extends React.Component {
+ class Author extends React.Component {
+
+  constructor(){
+    super()
+    this.setState={
+      author:''
+    }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log(props.computedMatch.params.id);
+    return {
+        author:props.computedMatch.params.id || {}
+    }
+  }
+
   render() {
     return (
       <div>
-        <div className={style.left}><Collection></Collection></div>
+        <div className={style.left}><Collection props={this.state.author}></Collection></div>
         <div className={style.right}>
           <div className={style.title}>
             <p>专题公告</p>
@@ -92,3 +108,26 @@ export default class Author extends React.Component {
   }
 }
 
+export default connect(
+
+  (state) => {
+    return {
+      UserList: state.user.data,
+      bookList: state.article.activeList,
+    }
+  },
+  (dispatch) => {
+    return {
+      getArticle: () => {
+        dispatch({
+          type: 'article/getArticle'
+        })
+      },
+      getUser: () => {
+        dispatch({
+          type: 'user/getUser',
+        })
+      }
+    }
+  },
+)(Author)
