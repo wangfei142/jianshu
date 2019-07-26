@@ -55,7 +55,7 @@ const menu = (
             <ul>
               { this.props.UserList.map( item => {
                 return (
-                  <li key={item._id}><NavLink to={`/subscriptions/collection/${ item.nickname }`} key={ this.props.location.pathname } ><span className={styles.listimg}><img src={item.avatar} alt="" /></span><span>{ item.nickname }</span></NavLink></li>
+                  <li key={item._id}><NavLink to={`/subscriptions/collection/${ item.nickname }`} ><span className={styles.listimg}><img src={item.avatar} alt="" /></span><span>{ item.nickname }</span></NavLink></li>
                 )
               } ) }
               
