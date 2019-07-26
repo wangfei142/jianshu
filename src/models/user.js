@@ -8,6 +8,7 @@ export default {
     registration: {},
     //登录时返回过来的 code 数值  0 成功 -1 失败
     loginMethod: {},
+    //所有用户
     data: [],
   },
   // 异步
