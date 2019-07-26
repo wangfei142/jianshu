@@ -57,8 +57,8 @@ class Witer extends React.Component {
               </ul>
             </div>
           </div>
-          <div className={style.imgdiv}><a className={style.imgs}><img src="https://upload.jianshu.io/users/upload_avatars/9028759/34271572-fac4-4699-99f0-bedf1de06c6f.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="" /></a></div>
-          <div className={style.author}><a>灰太狼</a></div>
+          <div className={style.imgdiv}><a className={style.imgs}><img src={ this.state.authorlist.avatar } alt="" /></a></div>
+          <div className={style.author}><a>{this.state.id}</a></div>
           <div className={style.guanzhu}>
             <ul>
               <li><span>82</span><p>关注 ></p></li>
