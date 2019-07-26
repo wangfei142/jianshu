@@ -21,7 +21,7 @@ class Timeline extends React.Component {
                     <div className={styles.title}>
                       <div className={styles.authors}> <NavLink className={styles.author}  to={ `/alonemeasse/${item.author}` }  ><img src={item.avatar} alt=""/></NavLink></div>
                       <div>
-                        <NavLink className={styles.likeTitle} to={ `/author/${item.author}` } >{item.author}</NavLink>
+                        <NavLink className={styles.likeTitle} to={`/p/${ item._id }`} >{item.author}</NavLink>
                         <span className={styles.likeBook}>喜欢了文章 · {item.posted_time}</span>
                       </div>
                     </div>
