@@ -56,8 +56,8 @@ class Rightlits extends Component {
                 <img src={code} alt="" />
               </dt>
               <dd>
-                <h2>下载简书手机App</h2>
-                <span>随时随地发现和创作内容</span>
+                <h2>制作不易！感谢打赏！</h2>
+                <span>感谢各位大佬的打赏！</span>
               </dd>
             </dl>
           </Popover>
