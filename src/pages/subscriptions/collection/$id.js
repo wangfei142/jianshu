@@ -1,6 +1,5 @@
 import React from 'react';
-import { Menu, Dropdown, Icon } from 'antd';
-import styles from '../index.less';
+import { Icon } from 'antd';
 import styless from './collection.less';
 // import Timeline from '../timeline/index.js'
 import NavLink from 'umi/navlink';
@@ -103,10 +102,10 @@ class Collection extends React.Component {
         <div className={styless.contentsd}>
           <div>
             <div className={styless.authorImg}>
-              <a href="" className={styless.headerImg}><img src={this.state.authorlist.avatar} alt="" /></a>
+              <NavLink to={ `/alonemeasse/${this.state.authorlist.nickname}` } className={styless.headerImg}><img src={this.state.authorlist.avatar} alt="" /></NavLink>
             </div>
             <div className={styless.xiangxixinxi}>
-              <p>{this.state.authorlist.nickname}</p>
+              <p><NavLink to={ `/alonemeasse/${this.state.authorlist.nickname}` } > {this.state.authorlist.nickname}</NavLink></p>
               <p><span><a href="">简书</a></span><span> 编 · 收录了54355篇文章 · 2027595人关注</span></p>
             </div>
 
