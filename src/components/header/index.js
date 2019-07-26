@@ -3,9 +3,8 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './index.less';
 import { Input, Icon, Menu, Dropdown } from 'antd';
-// import touxiang from '../../assets/tuoxian.jpg';
 import Navlink from 'umi/navlink';
-// import { tupleNum } from 'antd/lib/_util/type';
+import router from 'umi/router'
 
 //消息部分的下拉菜单
 const menu = (
@@ -206,7 +205,10 @@ class Header extends React.Component {
       });
     }
     this.props.searchArticle(tmp)
-    console.log(tmp);
+    
+    router.push("/subscriptions/search")
+
+
   }
 }
 
