@@ -62,7 +62,7 @@ class WriteRight extends React.Component {
     )
   }
   setActive = () => {   //发送文章请求
-    if (this.state.activeTitle == '' || this.state.text == '') {
+    if (this.state.activeTitle === '' || this.state.text === '') {
       message.warning('请输入内容');
       return
     }
@@ -76,7 +76,7 @@ class WriteRight extends React.Component {
       data: this.state.editorState.toHTML(),
       posted_time: time
     }
-    axios.post('http://localhost:8080/api/article', JSON.stringify(data))
+    axios.post('http://10.36.140.11:8080/api/article', JSON.stringify(data))
       .then(response => {
         this.setState({ loading: !this.state.loading })
         message.success('发布成功');

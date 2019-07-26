@@ -17,13 +17,21 @@ function BasicLayout(props) {
 function ArticleFrom(props) {
   return <div className={styles.container}>{props.children}</div>;
 }
+let loginMethod = JSON.parse(window.localStorage.getItem('loginMethod'))
+console.log(loginMethod);
 
 export default props => {
-  if (props.location.pathname === '/admin' ||
+
+  if (
+
+    props.location.pathname === '/admin' ||
     props.location.pathname === '/admin/user' ||
     props.location.pathname === '/admin/article' ||
     props.location.pathname === '/write') {
-    if (!window.localStorage.getItem('loginMethod')) {
+    if ((props.location.pathname === '/admin' || props.location.pathname === '/admin/user' || props.location.pathname === '/admin/article') && loginMethod.isvip !== 1) {
+      message.info('充钱使你强大')
+      router.push('/settings/basic')
+    } else if (!window.localStorage.getItem('loginMethod')) {
       message.info('先登录才能执行操作')
       router.push('/login')
     } else {

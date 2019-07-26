@@ -6,18 +6,22 @@ import { connect } from 'dva';
 import Banner from './banner'
 import imgtushu from '../../assets/wzhangru.jpg';
 import Navlink from 'umi/navlink';
-
+import { message } from 'antd';
 class SubjectList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      activeList: [],
+      index: 1
+    };
   }
   render() {
+
     return (
       <div>
         <ul className={styles._header_list}>
           <Banner />
-          {this.props.activeList.map(item => {
+          {this.props.activeList.slice(0, this.state.index * 5).map(item => {
             return (
               <li key={item._id}>
                 <div>
@@ -57,7 +61,9 @@ class SubjectList extends Component {
             );
           })}
         </ul>
-        <button className={styles._rigntlist_button}>阅读更多</button>
+        <button className={styles._rigntlist_button} onClick={() => {
+          this.addactiveList()
+        }}>阅读更多</button>
       </div>
     );
   }
@@ -70,6 +76,16 @@ class SubjectList extends Component {
   }
   componentWillMount() {
     this.props.getArticle()
+  }
+
+  addactiveList = () => {
+    this.setState({
+      index: this.state.index + 1,
+      activeList: this.props.activeList.slice(0, this.state.index * 5),
+    })
+    if (this.state.activeList.length === this.props.activeList.length) {
+      message.info('没有更多文章了')
+    }
   }
 }
 

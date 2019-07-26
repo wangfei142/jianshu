@@ -151,6 +151,7 @@ class User extends React.Component {
             <Form.Item label="用户昵称">
               {getFieldDecorator('nickname', {
                 rules: [{ required: true, message: '用户昵称必须要输入' }],
+                initialValue: this.state.curUserInfo.nickname,
               })(<Input />)}
             </Form.Item>
             <Form.Item label="会员等级">

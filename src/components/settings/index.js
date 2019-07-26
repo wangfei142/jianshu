@@ -6,11 +6,11 @@ import { Icon } from 'antd';
 class Settings extends Component {
   state = {
     menus: [
-      { to: '/settings/basic', name: '基础设置', icon:"unordered-list"},
-      { to: '/settings/personal', name: '个人资料', icon:"user"},
-      { to: '/settings/blacklist', name: '黑名单', icon:"stop"},
-      { to: '/settings/admire', name: '赞赏设置', icon:"dollar"},
-      { to: '/settings/account', name: '帐号管理',icon:"setting" },
+      { to: '/settings/basic', name: '基础设置', icon: "unordered-list" },
+      { to: '/settings/personal', name: '个人资料', icon: "user" },
+      { to: '/admin', name: '后台管理', icon: "stop" },
+      { to: '/settings/admire', name: '赞赏设置', icon: "dollar" },
+      { to: '/settings/account', name: '帐号管理', icon: "setting" },
     ],
   };
   render() {
@@ -22,7 +22,7 @@ class Settings extends Component {
               <li key={item.to}>
                 <NavLink exact activeClassName={styles.active} to={item.to}>
                   <div className={styles._settings_list}>
-                  <Icon type={item.icon} />
+                    <Icon type={item.icon} />
                   </div>
                   <span>
                     {item.name}
@@ -31,7 +31,7 @@ class Settings extends Component {
               </li>
             )
           })
-          }         
+          }
         </ul>
       </div>
     );
