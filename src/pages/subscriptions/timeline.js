@@ -14,6 +14,8 @@ class Timeline extends React.Component {
           <ul>
             {/* 每个li都是一块完整的作者文章 */}
             {this.props.bookList.map(item => {
+             var str = item.data;
+              var strs = this.getStr(str)
               return (
                 <li className={styles.rightLi} key={item._id}>
                   <NavLink className={styles.log} to={ `/alonemeasse/${item.author}` } ><img src="https://upload-images.jianshu.io/upload_images/2257137-a77743820dde5e19.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240/format/webp" alt="" /></NavLink>
@@ -25,8 +27,8 @@ class Timeline extends React.Component {
                         <span className={styles.likeBook}>喜欢了文章 · {item.posted_time}</span>
                       </div>
                     </div>
-                    <a href="" className={styles.testEnd}>{item.title}</a>
-                    <p className={styles.liContents}>{item.data}</p>
+                    <a href="" className={styles.testEnd} >{item.title}</a>
+                    <p className={styles.liContents}>{ strs }</p>
                     <div className={styles.bottom}><div><a href="/u/6026759b112a" target="_blank">Figo_OU</a></div> <a href="/p/1629bb9416fd#comments" target="_blank" className={styles.liuyan}><Icon type="form" />{item.hot}</a><a><i ><Icon type="sketch-circle" theme="filled" /></i> {item.discuss}</a> <span className={styles.dashang}><i ><Icon type="property-safety" theme="filled" /></i> {item.like}</span> </div>
                   </div>
                 </li>
@@ -66,6 +68,12 @@ class Timeline extends React.Component {
     //   , 1000
     // )
 
+  };
+  getStr(msg){
+    var msg = msg.replace(/<\/?[^>]*>/g, ''); //去除HTML Tag
+    msg = msg.replace(/[|]*\n/, '') //去除行尾空格
+    msg = msg.replace(/&npsp;/ig, ''); //去掉npsp
+    return msg;
   }
 
 }

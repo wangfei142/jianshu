@@ -130,11 +130,13 @@ class Collection extends React.Component {
               {/* <Timeline></Timeline>  */}
               <ul className={styless.xain}>
                 {this.state.booklist.map(item => {
+                  var str = item.data;
+                  var strs = this.getStr(str)
                   return (
                     <li className={styless.atrico} key={item._id}>
                       <div>
                         <p className={styless.tiaozhuan}><NavLink to={`/p/${ item._id }`}>{item.title}</NavLink></p>
-                        <p className={styless.contented}>{item.data}</p>
+                        <p className={styless.contented}>{ strs }</p>
                         <p><span>{item.author}</span><span><Icon type="form" /></span><span>27</span><span><Icon type="sketch-circle" theme="filled" /></span><span>33</span></p>
                       </div>
                       <div className={styless.autohrImg}>
@@ -159,6 +161,12 @@ class Collection extends React.Component {
   }
   componentDidUpdate() {
 
+  }
+  getStr(msg){
+    var msg = msg.replace(/<\/?[^>]*>/g, ''); //去除HTML Tag
+    msg = msg.replace(/[|]*\n/, '') //去除行尾空格
+    msg = msg.replace(/&npsp;/ig, ''); //去掉npsp
+    return msg;
   }
 }
 

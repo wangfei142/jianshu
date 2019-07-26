@@ -1,8 +1,11 @@
 import React from 'react';
 import { Icon } from 'antd';
 import style from './witer.less';
+import { connect } from 'dva';
+import NavLink from 'umi/navlink';
 
-export default class Witer extends React.Component {
+
+class Witer extends React.Component {
   constructor(props) {
     super()
     this.state = {
@@ -11,8 +14,11 @@ export default class Witer extends React.Component {
   }
   static getDerivedStateFromProps(props, state) {
     console.log(props);
+    var id = props.computedMatch.params.id || {};
     return {
-      id: props.computedMatch.params.id || {}
+      id,
+      authorlist: props.UserList.find(item => item.nickname === id) || {},
+      booklist: props.bookList
     }
 
   }
@@ -75,16 +81,23 @@ export default class Witer extends React.Component {
 
           <div>
             <ul>
-              <li>
-                <div className={style.contentli}>
-                  <p>Dl4j - CSV数据转换</p>
-                  <p className={style.conentasd}>准备数据转换asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd输出结果</p>
-                  <p className={style.licontent}><span><Icon type="sketch" /></span><span>5.1</span><span><Icon type="eye" /></span><span>107</span><span><Icon type="calendar" /></span><span>1</span><span><Icon type="heart" /></span><span>6</span><span>07.13.22.56</span></p>
-                </div>
-                <div className={style.bookimg}>
-                  <p><img src="https://upload-images.jianshu.io/upload_images/9028759-07315bb8dadcd082.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="" /></p>
-                </div>
-              </li>
+              { this.state.booklist.map(item => {
+                 var str = item.data;
+                 var strs = this.getStr(str)
+                return (
+                  <li key={item._id}>
+                  <div className={style.contentli}>
+                    <p><NavLink to={`/p/${ item._id }`}>{item.title}</NavLink></p>
+                    <p className={style.conentasd}>{ strs }</p>
+                    <p className={style.licontent}><span><Icon type="sketch" /></span><span>5.1</span><span><Icon type="eye" /></span><span>107</span><span><Icon type="calendar" /></span><span>1</span><span><Icon type="heart" /></span><span>6</span><span>07.13.22.56</span></p>
+                  </div>
+                  <div className={style.bookimg}>
+                    <p><img src={item.avatar} alt="" /></p>
+                  </div>
+                </li>
+                )
+              }) }
+             
             </ul>
           </div>
          
@@ -95,4 +108,44 @@ export default class Witer extends React.Component {
     )
   }
 
+  componentDidMount() {
+    this.props.getArticle();
+    this.props.getUser();
+    
+    // this.props.computedMatch.params.collection.split('collection')[0] ? this.props.computedMatch.params.collection.split('collection')[0] : ''
+  }
+  componentDidUpdate() {
+
+  }
+  getStr(msg){
+    var msg = msg.replace(/<\/?[^>]*>/g, ''); //去除HTML Tag
+    msg = msg.replace(/[|]*\n/, '') //去除行尾空格
+    msg = msg.replace(/&npsp;/ig, ''); //去掉npsp
+    return msg;
+  }
 }
+
+
+export default connect(
+
+  (state) => {
+    return {
+      UserList: state.user.data,
+      bookList: state.article.activeList,
+    }
+  },
+  (dispatch) => {
+    return {
+      getArticle: () => {
+        dispatch({
+          type: 'article/getArticle'
+        })
+      },
+      getUser: () => {
+        dispatch({
+          type: 'user/getUser',
+        })
+      }
+    }
+  },
+)(Witer)
