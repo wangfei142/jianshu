@@ -55,7 +55,7 @@ class ActiveInit extends React.Component {
               <TextArea rows={4} placeholder='请输入你的看法' value={this.state.commentTxt} onChange={this.setComment} />
               <div className={styles.commentBtn}>
                 <Button type="danger" block onClick={this.postComment}>
-                  发布文章
+                  发布评论
                 </Button>
               </div>
             </div>

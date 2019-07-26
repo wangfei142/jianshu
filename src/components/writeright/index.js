@@ -76,7 +76,8 @@ class WriteRight extends React.Component {
       data: this.state.editorState.toHTML(),
       posted_time: time
     }
-    axios.post('http://localhost:8080/api/article', JSON.stringify(data))
+    console.log(data)
+    axios.post('http://10.36.140.11:8080/api/article', JSON.stringify(data))
       .then(response => {
         this.setState({ loading: !this.state.loading })
         message.success('发布成功');
