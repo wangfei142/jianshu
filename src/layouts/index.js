@@ -37,4 +37,4 @@ export default props => {
     return <ArticleFrom {...props} />
   }
   return <BasicLayout {...props} />;
-};
+}; 

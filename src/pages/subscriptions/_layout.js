@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import styles from './index.less';
 import NavLink from 'umi/navlink';
@@ -39,7 +39,7 @@ const menu = (
             <div className={styles.attention}>
               <span>
                 <Dropdown overlay={menu} trigger={['click']}>
-                  <a className="ant-dropdown-link" href="#">
+                  <a className="ant-dropdown-link" >
                     <span> 全部关注&nbsp; </span><Icon type="caret-down" />
                   </a>
                 </Dropdown>
@@ -48,7 +48,7 @@ const menu = (
             <div className={styles.addAttention}>
               <span><Icon type="user" /></span>
               <span>添加专注</span>
-            </div>
+            </div>  
           </div>
           {/* 滑动列表 */}
           <div className={styles.peopleUl}>
