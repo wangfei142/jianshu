@@ -69,14 +69,17 @@ class WriteRight extends React.Component {
     this.setState({ loading: !this.state.loading })
     let time = new Date().toLocaleDateString() + new Date().toLocaleTimeString()
     let author = JSON.parse(window.localStorage.getItem('loginMethod')).nickname
-    console.log(author)
+
     let data = {
       author: author,
       title: this.state.activeTitle,
       data: this.state.editorState.toHTML(),
-      posted_time: time
+      posted_time: time,
+      hot: parseInt(Math.random() * 10000),
+      discuss: parseInt(Math.random() * 10000),
+      like: parseInt(Math.random() * 10000),
     }
-    axios.post('http://10.36.140.11:8080/api/article', JSON.stringify(data))
+    axios.post('http://10.36.140.11:7070/api/article', JSON.stringify(data))
       .then(response => {
         this.setState({ loading: !this.state.loading })
         message.success('发布成功');

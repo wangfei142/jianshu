@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.less';
 // import { Router, Route, Link } from 'react-router';
 import { connect } from 'dva';
-
+import Navlink from 'umi/navlink';
 import { Form, Icon, Input, Button, message } from 'antd';
 
 function hasErrors(fieldsError) {
@@ -20,11 +20,11 @@ class Login extends Component {
       <div className={styles._login_body}>
         <div className={styles._login_main}>
           <div className={styles._login_cut}>
-            <a href="/login">登录</a>
+            <Navlink to="/login">登录</Navlink>
             <i>·</i>
-            <a href="/sign" className={styles._login_style}>
+            <Navlink to="/sign" className={styles._login_style}>
               注册
-            </a>
+            </Navlink>
           </div>
           <Form onSubmit={this.handleSubmit} className={styles.login_form}>
             {/* 昵称 */}
@@ -90,7 +90,7 @@ class Login extends Component {
                 className={styles._login_form_button}
                 disabled={hasErrors(getFieldsError())}
               >
-                登录
+                注册
               </Button>
               {/* 社交账号注册 */}
               <div className={styles._login_bottom}>———— 社交帐号直接注册 ————</div>

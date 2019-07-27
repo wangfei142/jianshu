@@ -104,7 +104,7 @@ class ActiveInit extends React.Component {
   componentWillMount() {
     //请求获取文章内容
     let id = this.props.match.params.id
-    axios.get(`http://10.36.140.11:8080/api/article/${id}`)
+    axios.get(`http://10.36.140.11:7070/api/article/${id}`)
       .then(response => {
         this.setState({ activeDate: response.data.data })
         this.setState({ contentDate: response.data.data.data })
@@ -114,7 +114,7 @@ class ActiveInit extends React.Component {
       })
   }
   filterComment = () => {  //过滤评论
-    axios.get('http://10.36.140.11:8080/api/comment')
+    axios.get('http://10.36.140.11:7070/api/comment')
       .then(response => {
         let list = response.data.data.list.filter(item => {
           return item.id === this.props.match.params.id
@@ -141,7 +141,7 @@ class ActiveInit extends React.Component {
       retime: time,   // 评论时间
       content: contentTxt   // 评论内容
     }
-    axios.post('http://10.36.140.11:8080/api/comment', JSON.stringify(data))
+    axios.post('http://10.36.140.11:7070/api/comment', JSON.stringify(data))
       .then(response => {
         this.setState({ commentTxt: '' })
         this.props.getComment()

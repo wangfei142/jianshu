@@ -2,7 +2,8 @@
 
 import { Table, Button, Input, Popconfirm, Modal, Form, Cascader } from 'antd';
 import React from 'react';
-import { connect } from "dva"
+import { connect } from "dva";
+import { message } from "antd";
 
 import styles from './index.less';
 
@@ -49,8 +50,12 @@ class User extends React.Component {
               }}
               onConfirm={() => {
                 console.log(row);
+                if (row.isvip === 1) {
+                  message.config("无权删除管理员")
+                } else {
+                  this.props.delUser(row._id)
+                }
 
-                this.props.delUser(row._id)
               }}
             >
               <Button type="danger" className={styles.bnt}>删除</Button>

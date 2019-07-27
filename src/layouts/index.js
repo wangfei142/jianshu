@@ -38,7 +38,6 @@ export default props => {
       return <ArticleFrom {...props} />
     }
   }
-
   if (
     props.location.pathname === '/login' ||
     props.location.pathname === '/sign') {

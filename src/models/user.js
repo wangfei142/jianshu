@@ -15,20 +15,20 @@ export default {
   effects: {
     // 获取用户
     *getUser(action, { put }) {
-      let response = yield axios.post('http://10.36.140.11:8080/api/user/getuser');
+      let response = yield axios.post('http://10.36.140.11:7070/api/user/getuser');
       let res = yield response.data;
       yield put({ type: 'setUser', data: res.data.list });
     },
     //删除用户
     *delUser(action, { put }) {
-      let response = yield axios.delete(`http://10.36.140.11:8080/api/user/del/${action.id}`);
+      let response = yield axios.delete(`http://10.36.140.11:7070/api/user/del/${action.id}`);
       let res = yield response.data;
       yield put({ type: 'getUser' });
     },
     // 修改用户信息
     *updateUser(action, { put }) {
       console.log(action.data);
-      let response = yield axios.post(`http://10.36.140.11:8080/api/user/amendvip`, action.data);
+      let response = yield axios.post(`http://10.36.140.11:7070/api/user/amendvip`, action.data);
       let res = yield response.data;
       console.log(res);
       yield put({ type: 'getUser' });
@@ -43,7 +43,7 @@ export default {
         password: action.values.password,
       };
       let response = yield axios.post(
-        'http://10.36.140.11:8080/api/user/register',
+        'http://10.36.140.11:7070/api/user/register',
         JSON.stringify(data),
       );
       let res = yield response.data;
@@ -58,7 +58,7 @@ export default {
         password: action.name.password,
       };
       let response = yield axios.post(
-        'http://10.36.140.11:8080/api/user/login',
+        'http://10.36.140.11:7070/api/user/login',
         JSON.stringify(data),
       );
       let res = yield response.data;
@@ -90,7 +90,7 @@ export default {
             userInfo,
           };
           let response = yield axios.post(
-            `http://10.36.140.11:8080/api/user/amend`,
+            `http://10.36.140.11:7070/api/user/amend`,
             JSON.stringify(obj),
           );
           let res = yield response.data;
@@ -115,7 +115,7 @@ export default {
           //发送的数据 action.values.upload[0].originFileObj
           formData.append('avatar', action.values.upload[0].originFileObj);
           let response = yield axios.post(
-            `http://10.36.140.11:8080/api/user/updateavatar`,
+            `http://10.36.140.11:7070/api/user/updateavatar`,
             formData,
           );
           let res = yield response.data;
@@ -135,7 +135,7 @@ export default {
           formData.append('id', loginMethod._id);
           formData.append('avatar', action.values.upload[0].originFileObj);
           let portrait = yield axios.post(
-            `http://10.36.140.11:8080/api/user/updateavatar`,
+            `http://10.36.140.11:7070/api/user/updateavatar`,
             formData,
           );
           // 头像
@@ -149,7 +149,7 @@ export default {
             userInfo,
           };
           let response = yield axios.post(
-            `http://10.36.140.11:8080/api/user/amend`,
+            `http://10.36.140.11:7070/api/user/amend`,
             JSON.stringify(obj),
           );
           let res = yield response.data;

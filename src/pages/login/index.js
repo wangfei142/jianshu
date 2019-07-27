@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import styles from './index.less';
 
 import { connect } from 'dva';
-
+import Navlink from 'umi/navlink';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 
 function hasErrors(fieldsError) {
@@ -20,11 +20,11 @@ class Login extends Component {
       <div className={styles._login_body}>
         <div className={styles._login_main}>
           <div className={styles._login_cut}>
-            <a href="/login" className={styles._login_style}>
+            <Navlink to="/login" className={styles._login_style}>
               登录
-            </a>
+            </Navlink>
             <i>·</i>
-            <a href="/sign">注册</a>
+            <Navlink to="/sign">注册</Navlink>
           </div>
 
           <Form onSubmit={this.handleSubmit} className={styles.login_form}>
@@ -61,7 +61,7 @@ class Login extends Component {
                   <Checkbox>记住密码</Checkbox>
                 </div>,
               )}
-              <a className={styles._login_form_forgot} href="">
+              <a className={styles._login_form_forgot} href="#">
                 登录遇到问题？
               </a>
               <Button

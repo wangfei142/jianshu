@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./index.less"
-
+import Navlink from 'umi/navlink';
 
 //数据样式
 const footer = [
@@ -27,8 +27,8 @@ class FooterHome extends Component {
                 footer.map(item => {
                   return (
                     <div key={item.id}>
-                      <a href={item.url} >{item.title} <em>&nbsp; {item.d} &nbsp; </em>
-                      </a>
+                      <Navlink to={item.url} >{item.title} <em>&nbsp; {item.d} &nbsp; </em>
+                      </Navlink>
 
                     </div>
                   )

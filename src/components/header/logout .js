@@ -16,7 +16,7 @@ class Header extends React.Component {
             <ul className={styles._header_ul}>
               <li className={styles._header_lileft}>
                 {/* <img src="../../../assets/jshu.png" alt="Nav logo" /> */}
-                <a href="/">简书</a>
+                <Navlink to="/">简书</Navlink>
               </li>
               <li className={styles._header_licont}>
                 <ul className={styles._h_licont_ul}>
@@ -41,11 +41,11 @@ class Header extends React.Component {
                   </li>
 
                   <li className={styles._h_liright_login}>
-                    <a href="/login">登录</a>
+                    <Navlink to="/login">登录</Navlink>
                   </li>
 
                   <li className={styles._h_liright_register}>
-                    <a href="/sign">注册</a>
+                    <Navlink to="/sign">注册</Navlink>
                   </li>
                   <Navlink to="/write" className={styles._h_right_li}>
                     <Icon type="edit" />

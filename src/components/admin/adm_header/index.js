@@ -1,6 +1,6 @@
 import styles from './index.less';
 import React from 'react';
-
+import Navlink from 'umi/navlink';
 class Header extends React.Component {
   state = {
     headerImg: window.localStorage.getItem('loginMethod')
@@ -11,7 +11,7 @@ class Header extends React.Component {
     return (
       <div className={styles.wrap}>
         <div className={styles.left}>
-          <a href="/">回首页</a>
+          <Navlink to="/">回首页</Navlink>
         </div>
         <div className={styles.right}>
           <div className={styles.userInfo}>

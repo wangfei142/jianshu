@@ -10,44 +10,44 @@ import router from 'umi/router'
 const menu = (
   <Menu>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="message" />
         </span>
         评论
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="upload" />
         </span>
         投稿请求
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="mail" />
         </span>
         简信
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="heart" />
         </span>
         喜欢点赞
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="ellipsis" />
         </span>
         其它提醒
-      </a>
+      </Navlink>
     </Menu.Item>
   </Menu>
 );
@@ -63,61 +63,61 @@ const listdetele = ({ key }) => {
 const portrait = (
   <Menu onClick={listdetele}>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="user" />
         </span>
         我的主页
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <aNavlink to="/">
         <span>
           <Icon type="book" />
         </span>
         收藏的文章
-      </a>
+      </aNavlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="heart" />
         </span>
         喜欢的文章
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="heart" />
         </span>
         已购内容
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="wallet" />
         </span>
         我的钱包
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/settings/basic">
+      <Navlink to="/settings/basic">
 
         <span>
           <Icon type="setting" />
         </span>
         设置
-      </a>
+      </Navlink>
     </Menu.Item>
     <Menu.Item>
-      <a href="/">
+      <Navlink to="/">
         <span>
           <Icon type="logout" />
         </span>
         退出
-      </a>
+      </Navlink>
     </Menu.Item>
   </Menu>
 );
@@ -135,9 +135,9 @@ class Header extends React.Component {
             <ul className={styles._header_ul}>
               <li className={styles._header_lileft}>
                 {/* <img src="../../../assets/jshu.png" alt="Nav logo" /> */}
-                <a href="/">
+                <Navlink to="/">
                   简书
-                </a>
+                </Navlink>
               </li>
               <li className={styles._header_licont}>
                 <ul className={styles._h_licont_ul}>
@@ -146,10 +146,10 @@ class Header extends React.Component {
                     &nbsp;发现
                   </li>
                   <li>
-                    <a href="/subscriptions/timeline">
+                    <Navlink to="/subscriptions/timeline">
                       <Icon type="read" />
                       &nbsp;关注
-                    </a>
+                    </Navlink>
                   </li>
                   {/* // 消息下拉数据 */}
                   <Dropdown overlay={menu} overlayClassName="rightimgtu">
@@ -205,7 +205,7 @@ class Header extends React.Component {
       });
     }
     this.props.searchArticle(tmp)
-    
+
     router.push("/subscriptions/search")
 
 

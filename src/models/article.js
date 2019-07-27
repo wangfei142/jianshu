@@ -20,27 +20,29 @@ export default {
     },
     //获取评论
     *getComment(action, { put }) {
-      let response = yield axios.get('http://10.36.140.11:8080/api/comment');
+      let response = yield axios.get('http://10.36.140.11:7070/api/comment');
       let res = yield response.data;
       yield put({ type: 'setComment', commentList: res.data.list });
       yield put({ type: 'setCompilationsList', commentList: res.data.list })
     },
     //删除评论
     *delComment(action, { put }) {
-      let response = yield axios.delete(`http://10.36.140.11:8080/api/comment/${action.id}`);
+      let response = yield axios.delete(`http://10.36.140.11:7070/api/comment/${action.id}`);
       let res = yield response.data;
       yield put({ type: 'getComment' });
     },
     //获取文章
     *getArticle(action, { put }) {
-      let response = yield axios.get('http://10.36.140.11:8080/api/article');
+      let response = yield axios.get('http://10.36.140.11:7070/api/article');
       let res = yield response.data;
-      yield put({ type: 'setArticle', activeList: res.data.list });
+      let li = res.data.list.reverse();
+
+      yield put({ type: 'setArticle', activeList: li });
       yield put({ type: 'getComment' });
     },
     //删除文章
     *delArticle(action, { put }) {
-      let response = yield axios.delete(`http://10.36.140.11:8080/api/article/${action.id}`);
+      let response = yield axios.delete(`http://10.36.140.11:7070/api/article/${action.id}`);
       let res = yield response.data;
       yield put({ type: 'getArticle' });
     },
